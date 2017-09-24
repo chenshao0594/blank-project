@@ -18,8 +18,6 @@ package sample.ui;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.boot.system.ApplicationPidFileWriter;
-import org.springframework.boot.system.EmbeddedServerPortFileWriter;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,7 +29,7 @@ public class SampleWebUiApplication {
 
 	public static void main(String[] args) throws Exception {
 		SpringApplication springApplication = new SpringApplication(SampleWebUiApplication.class);
-		springApplication.addListeners(new ApplicationPidFileWriter(), new EmbeddedServerPortFileWriter());
+		springApplication.addListeners( );
 		springApplication.run(args);
 	}
 }

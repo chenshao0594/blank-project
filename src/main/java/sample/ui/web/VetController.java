@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import lombok.extern.slf4j.Slf4j;
 import sample.ui.model.Vets;
 import sample.ui.service.ClinicService;
 
@@ -35,7 +34,6 @@ import sample.ui.service.ClinicService;
  */
 @Controller
 @RequestMapping("/vets")
-@Slf4j
 public class VetController {
 
 	@Autowired
@@ -53,7 +51,6 @@ public class VetController {
 		Vets vets = new Vets();
 		vets.getVetList().addAll(this.clinicService.findVets());
 		model.addAttribute("vets", vets);
-
 
 		return "vets/vetList";
 	}

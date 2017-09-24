@@ -24,27 +24,24 @@ import org.springframework.stereotype.Component;
 import com.github.dandelion.core.web.DandelionFilter;
 import com.github.dandelion.core.web.DandelionServlet;
 import com.github.dandelion.datatables.core.web.filter.DatatablesFilter;
-import com.github.dandelion.datatables.thymeleaf.dialect.DataTablesDialect;
-import com.github.dandelion.thymeleaf.dialect.DandelionDialect;
 
 /**
  * Configuration class to set up Dandelion-related beans.
  *
  * @author Arnaldo Piccinelli
  */
-@Component
-@Configuration
+//@Component
+//@Configuration
 public class DandelionConfig {
 
-	@Bean
-	public DataTablesDialect dataTablesDialect() {
-		return new DataTablesDialect();
-	}
-
-	@Bean
-	public DandelionDialect dandelionDialect() {
-		return new DandelionDialect();
-	}
+//	public DataTablesDialect dataTablesDialect() {
+//		return new DataTablesDialect();
+//	}
+//
+//	@Bean
+//	public DandelionDialect dandelionDialect() {
+//		return new DandelionDialect();
+//	}
 
 	@Bean
 	public FilterRegistrationBean dandelionFilterRegistrationBean() {

@@ -27,8 +27,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Controller that handles the home page and exceptional cases.
  *
@@ -36,7 +34,6 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Controller
 @ControllerAdvice
-@Slf4j
 public class GeneralController {
 
 	@RequestMapping("/")

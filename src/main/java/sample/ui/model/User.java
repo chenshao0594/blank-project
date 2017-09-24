@@ -25,14 +25,11 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * A system user.
  */
 @Entity
 @Table(name = "users")
-@Slf4j
 public class User extends BaseEntity implements UserDetails {
 
 	private static final long serialVersionUID = 2002390446280945447L;

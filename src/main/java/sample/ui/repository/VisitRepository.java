@@ -41,8 +41,7 @@ import sample.ui.model.Visit;
 public interface VisitRepository extends Repository<Visit, Long> {
 
 	/**
-	 * Save a <code>Visit</code> to the data store, either inserting or updating
-	 * it.
+	 * Save a <code>Visit</code> to the data store, either inserting or updating it.
 	 *
 	 * @param visit
 	 *            the <code>Visit</code> to save

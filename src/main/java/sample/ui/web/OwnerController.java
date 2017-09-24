@@ -21,21 +21,25 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import sample.ui.model.Owner;
 import sample.ui.service.ClinicService;
+import sample.ui.service.OwnerService;
 
 /**
  * @author Juergen Hoeller
@@ -51,20 +55,32 @@ public class OwnerController {
 
 	@Autowired
 	private ClinicService clinicService;
+	
+	@Autowired
+	private OwnerService ownerService;
+
 
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
 	}
+	
+	@GetMapping()
+	public String listEntities(Model model, Pageable pageable) {
+		Page<Owner> page = this.ownerService.findAll(pageable);
+		model.addAttribute("page", page);
+		return "owners/ownersList";
+	}
 
-	@RequestMapping(value = "/new", method = RequestMethod.GET)
+
+	@GetMapping(value = "/new")
 	public String initCreationForm(Model model) {
 		Owner owner = new Owner();
 		model.addAttribute(owner);
 		return "owners/ownerForm";
 	}
 
-	@RequestMapping(value = "/new", method = RequestMethod.POST)
+	@PostMapping(value = "/new")
 	public String processCreationForm(@Valid Owner owner, BindingResult result, SessionStatus status) {
 		if (result.hasErrors()) {
 			return "owners/ownerForm";
@@ -75,18 +91,14 @@ public class OwnerController {
 		}
 	}
 
-	@RequestMapping(value = "/find", method = RequestMethod.GET)
+	@GetMapping(value = "/find")
 	public String initFindForm(Model model) {
 		model.addAttribute("owner", new Owner());
 		return "owners/findOwners";
 	}
 
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView showOwners(Model model) {
-		return new ModelAndView("redirect:/owners/list.html", model.asMap());
-	}
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	@GetMapping(value = "/list")
 	public String processFindForm(Owner owner, BindingResult result, Model model, HttpSession session) {
 		Collection<Owner> results = null;
 
@@ -117,14 +129,14 @@ public class OwnerController {
 		}
 	}
 
-	@RequestMapping(value = "/{ownerId}/edit", method = RequestMethod.GET)
+	@GetMapping(value = "/{ownerId}/edit")
 	public String initUpdateOwner(@PathVariable("ownerId") int ownerId, Model model) {
 		Owner owner = this.clinicService.findOwnerById(ownerId);
 		model.addAttribute(owner);
 		return "owners/ownerForm";
 	}
 
-	@RequestMapping(value = "/{ownerId}/edit", method = RequestMethod.POST)
+	@PostMapping(value = "/{ownerId}/edit")
 	public String processUpdateOwner(@Valid Owner owner, BindingResult result, SessionStatus status) {
 		if (result.hasErrors()) {
 			return "owners/ownerForm";
@@ -142,7 +154,7 @@ public class OwnerController {
 	 *            the ID of the owner to display
 	 * @return a ModelMap with the model attributes for the view
 	 */
-	@RequestMapping("/{ownerId}")
+	@GetMapping("/{ownerId}")
 	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
 		ModelAndView mav = new ModelAndView("owners/ownerDetails");
 		mav.addObject(this.clinicService.findOwnerById(ownerId));

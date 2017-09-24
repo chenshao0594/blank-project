@@ -39,7 +39,8 @@ public class BaseEntity implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	protected Long id;
 
-	public BaseEntity() {}
+	public BaseEntity() {
+	}
 
 	public void setId(Long id) {
 		this.id = id;

@@ -31,7 +31,6 @@ import com.rometools.rome.feed.atom.Content;
 import com.rometools.rome.feed.atom.Entry;
 import com.rometools.rome.feed.atom.Feed;
 
-import lombok.extern.slf4j.Slf4j;
 import sample.ui.model.Vet;
 import sample.ui.model.Vets;
 
@@ -43,7 +42,6 @@ import sample.ui.model.Vets;
  * @author Arnaldo Piccinelli
  */
 @Configuration
-@Slf4j
 public class VetsAtomView extends AbstractAtomFeedView {
 
 	@Bean(name = "vets/vetList.atom")
@@ -61,7 +59,6 @@ public class VetsAtomView extends AbstractAtomFeedView {
 	@Override
 	protected List<Entry> buildFeedEntries(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-
 
 		Vets vets = (Vets) model.get("vets");
 		List<Vet> vetList = vets.getVetList();

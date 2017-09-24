@@ -11,11 +11,9 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 
-import lombok.extern.slf4j.Slf4j;
 import sample.ui.model.User;
 import sample.ui.repository.UserRepository;
 
-@Slf4j
 public class DBDrivenUserDetailsManager implements UserDetailsManager {
 
 	private AuthenticationManager authenticationManager;
@@ -66,15 +64,15 @@ public class DBDrivenUserDetailsManager implements UserDetailsManager {
 
 		String username = currentUser.getName();
 
-
 		// If an authentication manager has been set, re-authenticate the user
 		// with the supplied password.
 		if (authenticationManager != null) {
-//			log.debug("Reauthenticating user '" + username + "' for password change request.");
+			// log.debug("Reauthenticating user '" + username + "' for password change
+			// request.");
 
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, oldPassword));
 		} else {
-			//log.debug("No authentication manager set. Password won't be re-checked.");
+			// log.debug("No authentication manager set. Password won't be re-checked.");
 		}
 
 		User changedUser = userRepository.findByUsername(username);

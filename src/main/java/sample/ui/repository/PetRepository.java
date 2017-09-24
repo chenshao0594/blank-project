@@ -50,8 +50,7 @@ public interface PetRepository extends Repository<Pet, Long> {
 	Pet findById(Long id) throws DataAccessException;
 
 	/**
-	 * Save a <code>Pet</code> to the data store, either inserting or updating
-	 * it.
+	 * Save a <code>Pet</code> to the data store, either inserting or updating it.
 	 *
 	 * @param pet
 	 *            the <code>Pet</code> to save

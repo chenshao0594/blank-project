@@ -23,8 +23,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.stereotype.Component;
 
-import lombok.extern.slf4j.Slf4j;
-
 /**
  * Class used to house all aspect-related method.
  *
@@ -34,48 +32,55 @@ import lombok.extern.slf4j.Slf4j;
 @EnableAspectJAutoProxy
 @Component
 @Configuration
-@Slf4j
 public class LoggingAspectAnnotationDriven {
 
 	@Before("execution(* sample.ui.web.GeneralController.handleException(..))")
 	public void beforeExceptionHandler(JoinPoint jp) {
-		//log.info("(beforeExceptionHandler) Before executing '" + jp.getSignature().toLongString() + "'");
+		// log.info("(beforeExceptionHandler) Before executing '" +
+		// jp.getSignature().toLongString() + "'");
 	}
 
 	@After("execution(* sample.ui.web.GeneralController.handleException(..))")
 	public void afterExceptionHandler(JoinPoint jp) {
-		//log.info("(afterExceptionHandler) Before executing '" + jp.getSignature().toLongString() + "'");
+		// log.info("(afterExceptionHandler) Before executing '" +
+		// jp.getSignature().toLongString() + "'");
 	}
 
 	@Before("execution(* sample.ui.config.MultiHttpSecurityConfig.*.*(..))")
 	public void beforeMultiHttpSecurityConfigSubClasses(JoinPoint jp) {
-		//log.info("(beforeMultiHttpSecurityConfigSubClasses) Before executing '" + jp.getSignature().toLongString()
-		//		+ "'");
+		// log.info("(beforeMultiHttpSecurityConfigSubClasses) Before executing '" +
+		// jp.getSignature().toLongString()
+		// + "'");
 	}
 
 	@Before("execution(* sample.ui.config.MultiHttpSecurityConfig.*(..))")
 	public void beforeMultiHttpSecurityConfig(JoinPoint jp) {
-		//log.info("(beforeMultiHttpSecurityConfig) Before executing '" + jp.getSignature().toLongString() + "'");
+		// log.info("(beforeMultiHttpSecurityConfig) Before executing '" +
+		// jp.getSignature().toLongString() + "'");
 	}
 
 	@Before("execution(* sample.ui.SampleWebUiApplication.*(..))")
 	public void beforeSampleWebUiApplication(JoinPoint jp) {
-		//log.info("(beforeSampleWebUiApplication) Before executing '" + jp.getSignature().toLongString() + "'");
+		// log.info("(beforeSampleWebUiApplication) Before executing '" +
+		// jp.getSignature().toLongString() + "'");
 	}
 
 	@After("execution(* sample.ui.SampleWebUiApplication.*(..))")
 	public void afterSampleWebUiApplication(JoinPoint jp) {
-		//log.info("(afterSampleWebUiApplication) After executing '" + jp.getSignature().toLongString() + "'");
+		// log.info("(afterSampleWebUiApplication) After executing '" +
+		// jp.getSignature().toLongString() + "'");
 	}
 
 	@Before("execution(* sample.ui.service.ClinicServiceImpl.*(..))")
 	public void beforeClinicServiceImpl(JoinPoint jp) {
-		//log.info("(beforeClinicServiceImpl) Before executing '" + jp.getSignature().toLongString() + "'");
+		// log.info("(beforeClinicServiceImpl) Before executing '" +
+		// jp.getSignature().toLongString() + "'");
 	}
 
 	@After("execution(* sample.ui.service.ClinicServiceImpl.*(..))")
 	public void afterClinicServiceImpl(JoinPoint jp) {
-		//log.info("(afterClinicServiceImpl) After executing '" + jp.getSignature().toLongString() + "'");
+		// log.info("(afterClinicServiceImpl) After executing '" +
+		// jp.getSignature().toLongString() + "'");
 	}
 
 	// @Before("execution(* sample.ui.web.Pet*.*(..))")

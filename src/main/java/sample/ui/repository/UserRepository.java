@@ -40,13 +40,13 @@ import sample.ui.model.User;
 public interface UserRepository extends Repository<User, Long> {
 
 	/**
-	 * Retrieve <code>User</code>s from the data store by last name, returning
-	 * all users whose last name <i>starts</i> with the given name.
+	 * Retrieve <code>User</code>s from the data store by last name, returning all
+	 * users whose last name <i>starts</i> with the given name.
 	 *
 	 * @param lastName
 	 *            Value to search for
-	 * @return a <code>Collection</code> of matching <code>User</code>s (or an
-	 *         empty <code>Collection</code> if none found)
+	 * @return a <code>Collection</code> of matching <code>User</code>s (or an empty
+	 *         <code>Collection</code> if none found)
 	 */
 	Collection<User> findByNameLike(String name) throws DataAccessException;
 
@@ -55,16 +55,16 @@ public interface UserRepository extends Repository<User, Long> {
 	 *
 	 * @param lastName
 	 *            Value to search for
-	 * @return a <code>Collection</code> of matching <code>User</code>s (or an
-	 *         empty <code>Collection</code> if none found)
+	 * @return a <code>Collection</code> of matching <code>User</code>s (or an empty
+	 *         <code>Collection</code> if none found)
 	 */
 	User findByUsername(String username) throws DataAccessException;
 
 	/**
 	 * Retrieve all <code>User</code>s from the data store.
 	 *
-	 * @return a <code>Collection</code> of matching <code>User</code>s (or an
-	 *         empty <code>Collection</code> if none found)
+	 * @return a <code>Collection</code> of matching <code>User</code>s (or an empty
+	 *         <code>Collection</code> if none found)
 	 */
 	Collection<User> findAll() throws DataAccessException;
 
@@ -80,8 +80,7 @@ public interface UserRepository extends Repository<User, Long> {
 	User findById(Long id) throws DataAccessException;
 
 	/**
-	 * Save an <code>User</code> to the data store, either inserting or updating
-	 * it.
+	 * Save an <code>User</code> to the data store, either inserting or updating it.
 	 *
 	 * @param user
 	 *            the <code>User</code> to save
@@ -90,8 +89,7 @@ public interface UserRepository extends Repository<User, Long> {
 	User save(User user) throws DataAccessException;
 
 	/**
-	 * Save an <code>User</code> to the data store, either inserting or updating
-	 * it.
+	 * Save an <code>User</code> to the data store, either inserting or updating it.
 	 *
 	 * @param user
 	 *            the <code>User</code> to save

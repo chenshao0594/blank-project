@@ -84,7 +84,7 @@ public class MultiHttpSecurityConfig {
 		public class BasicRememberMeUserDetailsService implements UserDetailsService {
 			@Override
 			public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-				return new User(username, "", Collections.<GrantedAuthority> emptyList());
+				return new User(username, "", Collections.<GrantedAuthority>emptyList());
 			}
 		}
 	}
@@ -124,27 +124,21 @@ public class MultiHttpSecurityConfig {
 
 		@Override
 		public void init(AuthenticationManagerBuilder auth) throws Exception {
-			//@formatter:off
-			String authoritiesByUsernameQuery = "select username, authority from user_authorities " +
-					"inner join users on user_authorities.user_id = users.id " +
-					"inner join authorities on user_authorities.authority_id = authorities.id " +
-					"where username = ?";
+			// @formatter:off
+			String authoritiesByUsernameQuery = "select username, authority from user_authorities "
+					+ "inner join users on user_authorities.user_id = users.id "
+					+ "inner join authorities on user_authorities.authority_id = authorities.id "
+					+ "where username = ?";
 
 			JdbcUserDetailsManager userDetailsService = new JdbcUserDetailsManager();
 			userDetailsService.setDataSource(dataSource);
 			userDetailsService.setAuthoritiesByUsernameQuery(authoritiesByUsernameQuery);
 			PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-			auth
-				.userDetailsService(userDetailsService)
-					.passwordEncoder(passwordEncoder)
-				.and()
-					.jdbcAuthentication()
-						.authoritiesByUsernameQuery(authoritiesByUsernameQuery)
-						.passwordEncoder(passwordEncoder)
-						.dataSource(dataSource)
-			;
-			//@formatter:on
+			auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder).and().jdbcAuthentication()
+					.authoritiesByUsernameQuery(authoritiesByUsernameQuery).passwordEncoder(passwordEncoder)
+					.dataSource(dataSource);
+			// @formatter:on
 		}
 	}
 
@@ -163,62 +157,29 @@ public class MultiHttpSecurityConfig {
 
 		@Override
 		public void configure(WebSecurity web) throws Exception {
-			//@formatter:off
-			web
-				.ignoring()
-					.antMatchers(UNSECURED_RESOURCE_LIST);
-			//@formatter:on
+			// @formatter:off
+			web.ignoring().antMatchers(UNSECURED_RESOURCE_LIST);
+			// @formatter:on
 		}
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			//@formatter:off
-			http
-				.headers()
-					.frameOptions()
-						.sameOrigin()
-			.and()
-				.authorizeRequests()
-					.antMatchers(UNAUTHORIZED_RESOURCE_LIST)
-						.permitAll()
-					.antMatchers("/git", "/manage", "/manage/**")
-						.hasRole("ADMIN")
-					.anyRequest()
-						.authenticated()
-			.and()
-				.formLogin()
-					.loginPage("/login")
-					.permitAll()
-			.and()
-				.headers()
-					.cacheControl()
-				.and()
-					.frameOptions()
-						.deny()
-			.and()
-				.exceptionHandling()
-					.accessDeniedPage("/access?error")
-			.and()
-				.rememberMe()
-					.useSecureCookie(true)
-					.tokenValiditySeconds(60 * 60 * 24 * 10) // 10 days
-					.rememberMeServices(rememberMeServices)
-					.key(rememberMeToken)
-			.and()
-				.logout()
-					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-					.logoutSuccessUrl("/?logout")
-			.and()
-				.sessionManagement()
-					.maximumSessions(1)
-					.expiredUrl("/login?expired");
+			// @formatter:off
+			http.headers().frameOptions().sameOrigin().and().authorizeRequests().antMatchers(UNAUTHORIZED_RESOURCE_LIST)
+					.permitAll().antMatchers("/git", "/manage", "/manage/**").hasRole("ADMIN").anyRequest()
+					.authenticated().and().formLogin().loginPage("/login").permitAll().and().headers().cacheControl()
+					.and().frameOptions().deny().and().exceptionHandling().accessDeniedPage("/access?error").and()
+					.rememberMe().useSecureCookie(true).tokenValiditySeconds(60 * 60 * 24 * 10) // 10 days
+					.rememberMeServices(rememberMeServices).key(rememberMeToken).and().logout()
+					.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/?logout").and()
+					.sessionManagement().maximumSessions(1).expiredUrl("/login?expired");
 			// @formatter:on
 		}
 	}
 
 	@Configuration
 	@Order(1)
-	@Profile({ "dev"})
+	@Profile({ "dev" })
 	public static class NonLiveWebSecurityConfigurerAdapter extends WebSecurityConfigurerAdapter {
 		@Value("${rememberMeToken}")
 		private String rememberMeToken;
@@ -231,55 +192,22 @@ public class MultiHttpSecurityConfig {
 
 		@Override
 		public void configure(WebSecurity web) throws Exception {
-			//@formatter:off
-			web
-				.ignoring()
-					.antMatchers(UNSECURED_RESOURCE_LIST);
-			//@formatter:on
+			// @formatter:off
+			web.ignoring().antMatchers(UNSECURED_RESOURCE_LIST);
+			// @formatter:on
 		}
 
 		@Override
 		protected void configure(HttpSecurity http) throws Exception {
-			//@formatter:off
-			http
-				.headers()
-					.frameOptions()
-						.sameOrigin()
-			.and()
-				.authorizeRequests()
-					.antMatchers(UNAUTHORIZED_RESOURCE_LIST)
-						.permitAll()
-					.antMatchers("/git", "/manage", "/manage/**")
-						.permitAll()
-					.anyRequest()
-						.authenticated()
-			.and()
-				.formLogin()
-					.loginPage("/login")
-					.permitAll()
-			.and()
-				.headers()
-					.cacheControl()
-				.and()
-					.frameOptions()
-						.deny()
-			.and()
-				.exceptionHandling()
-					.accessDeniedPage("/access?error")
-			.and()
-				.rememberMe()
-					.useSecureCookie(true)
-					.tokenValiditySeconds(60 * 60 * 24 * 10) // 10 days
-					.rememberMeServices(rememberMeServices)
-					.key(rememberMeToken)
-			.and()
-				.logout()
-					.logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-					.logoutSuccessUrl("/?logout")
-			.and()
-				.sessionManagement()
-					.maximumSessions(1)
-					.expiredUrl("/login?expired");
+			// @formatter:off
+			http.headers().frameOptions().sameOrigin().and().authorizeRequests().antMatchers(UNAUTHORIZED_RESOURCE_LIST)
+					.permitAll().antMatchers("/git", "/manage", "/manage/**").permitAll().anyRequest().authenticated()
+					.and().formLogin().loginPage("/login").permitAll().and().headers().cacheControl().and()
+					.frameOptions().deny().and().exceptionHandling().accessDeniedPage("/access?error").and()
+					.rememberMe().useSecureCookie(true).tokenValiditySeconds(60 * 60 * 24 * 10) // 10 days
+					.rememberMeServices(rememberMeServices).key(rememberMeToken).and().logout()
+					.logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/?logout").and()
+					.sessionManagement().maximumSessions(1).expiredUrl("/login?expired");
 			// @formatter:on
 		}
 	}

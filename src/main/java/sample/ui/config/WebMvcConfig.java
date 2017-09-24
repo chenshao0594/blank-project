@@ -29,8 +29,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.webflow.mvc.servlet.FlowHandlerAdapter;
 import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
 import org.thymeleaf.spring4.SpringTemplateEngine;
-import org.thymeleaf.spring4.view.AjaxThymeleafViewResolver;
-import org.thymeleaf.spring4.view.FlowAjaxThymeleafView;
+import org.thymeleaf.spring4.webflow.view.AjaxThymeleafViewResolver;
+import org.thymeleaf.spring4.webflow.view.FlowAjaxThymeleafView;
 
 import sample.ui.model.Vets;
 import sample.ui.view.XmlViewResolver;

@@ -21,14 +21,6 @@ import javax.persistence.Column;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-
-/**
- * @author Rob Winch
- */
-@Data
-@EqualsAndHashCode(callSuper=true)
 public class Message extends BaseEntity {
 
 	private static final long serialVersionUID = -4768045909580278883L;
@@ -42,4 +34,31 @@ public class Message extends BaseEntity {
 	private String summary;
 
 	private Calendar created = Calendar.getInstance();
+
+	public String getMessageText() {
+		return messageText;
+	}
+
+	public void setMessageText(String messageText) {
+		this.messageText = messageText;
+	}
+
+	public String getSummary() {
+		return summary;
+	}
+
+	public void setSummary(String summary) {
+		this.summary = summary;
+	}
+
+	public Calendar getCreated() {
+		return created;
+	}
+
+	public void setCreated(Calendar created) {
+		this.created = created;
+	}
+	
+	
+	
 }

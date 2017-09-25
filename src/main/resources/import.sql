@@ -29,7 +29,7 @@ insert into user_authorities (user_id, authority_id) values (5, 2);
 insert into user_authorities (user_id, authority_id) values (6, 2);
 
 -- ----------------------------------------------------------
--- PetClinic
+-- Blank Project
 -- ----------------------------------------------------------
 insert into owners(id, first_name, last_name, address, city, telephone,created_by,created_date,last_modified_by,last_modified_date) values (1, 'George', 'Franklin', '110 W. Liberty St.', 'Madison', '6085551023','system', CURRENT_TIMESTAMP, 'system',  CURRENT_TIMESTAMP);
 insert into owners(id, first_name, last_name, address, city, telephone,created_by,created_date,last_modified_by,last_modified_date) values (2, 'Betty', 'Davis', '638 Cardinal Ave.', 'Sun Prairie', '6085551749','system', CURRENT_TIMESTAMP, 'system',  CURRENT_TIMESTAMP);

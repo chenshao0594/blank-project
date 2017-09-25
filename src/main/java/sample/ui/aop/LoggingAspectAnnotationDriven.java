@@ -59,76 +59,16 @@ public class LoggingAspectAnnotationDriven {
 		// jp.getSignature().toLongString() + "'");
 	}
 
-	@Before("execution(* sample.ui.SampleWebUiApplication.*(..))")
+	@Before("execution(* sample.ui.SampleApplication.*(..))")
 	public void beforeSampleWebUiApplication(JoinPoint jp) {
 		// log.info("(beforeSampleWebUiApplication) Before executing '" +
 		// jp.getSignature().toLongString() + "'");
 	}
 
-	@After("execution(* sample.ui.SampleWebUiApplication.*(..))")
+	@After("execution(* sample.ui.SampleApplication.*(..))")
 	public void afterSampleWebUiApplication(JoinPoint jp) {
 		// log.info("(afterSampleWebUiApplication) After executing '" +
 		// jp.getSignature().toLongString() + "'");
 	}
-
-	@Before("execution(* sample.ui.service.ClinicServiceImpl.*(..))")
-	public void beforeClinicServiceImpl(JoinPoint jp) {
-		// log.info("(beforeClinicServiceImpl) Before executing '" +
-		// jp.getSignature().toLongString() + "'");
-	}
-
-	@After("execution(* sample.ui.service.ClinicServiceImpl.*(..))")
-	public void afterClinicServiceImpl(JoinPoint jp) {
-		// log.info("(afterClinicServiceImpl) After executing '" +
-		// jp.getSignature().toLongString() + "'");
-	}
-
-	// @Before("execution(* sample.ui.web.Pet*.*(..))")
-	// public void beforePet(JoinPoint jp) {
-	// log.info("(beforePet) PET Before executing '" +
-	// jp.getSignature().toLongString() + "'");
-	// }
-	//
-	// @After("execution(* sample.ui.web.Pet*.*(..))")
-	// public void afterPet(JoinPoint jp) {
-	// log.info("(afterPet) PET After executing '" +
-	// jp.getSignature().toLongString() + "'");
-	// }
-	//
-	// @Before("execution(* sample.ui.web.*.*(*))")
-	// public void beforeAdviceWeb(JoinPoint jp) {
-	// log.info("(beforeAdviceWeb) Before executing '" +
-	// jp.getSignature().toLongString() + "'");
-	// }
-	//
-	// @After("execution(* sample.ui.web.*.*(*))")
-	// public void afterAdviceWeb(JoinPoint jp) {
-	// log.info("(afterAdviceWeb) After executing '" +
-	// jp.getSignature().toLongString() + "'");
-	// }
-	//
-	// @Before("execution(* sample.ui.service.*.*(*))")
-	// public void beforeAdviceService(JoinPoint jp) {
-	// log.info("(beforeAdviceService) Before executing '" +
-	// jp.getSignature().toLongString() + "'");
-	// }
-	//
-	// @After("execution(* sample.ui.service.*.*(*))")
-	// public void afterAdviceService(JoinPoint jp) {
-	// log.info("(afterAdviceService) After executing '" +
-	// jp.getSignature().toLongString() + "'");
-	// }
-	//
-	// @Before("execution(* sample.ui.config.*.*(*))")
-	// public void beforeAdviceConfig(JoinPoint jp) {
-	// log.info("(beforeAdviceConfig) Before executing '" +
-	// jp.getSignature().toLongString() + "'");
-	// }
-	//
-	// @After("execution(* sample.ui.config.*.*(*))")
-	// public void afterAdviceConfig(JoinPoint jp) {
-	// log.info("(afterAdviceConfig) After executing '" +
-	// jp.getSignature().toLongString() + "'");
-	// }
 
 }

@@ -15,7 +15,7 @@
 
 			<div role="alert" th:if="${statusMessage}" th:class="'alert ' + ${statusMessageClass}?: 'alert-info'" th:text="${statusMessage}"></div>
 
-			<form th:object="${owner}" method="post" action="ownerDetails.html" th:action="@{${#httpServletRequest.servletPath}}"
+			<form th:object="${owner}" method="post" action="ownerDetails.html" th:action="@{/owners}"
 				class="form-horizontal" id="owner-form">
 				<div th:replace="fragments/hiddenErrors :: hiddenErrors">REPLACE BEFORE COMMITTING</div>
 
@@ -91,7 +91,7 @@
 							<div class="form-actions pull-right">
 								<input type="submit" class="btn btn-success" th:value="(${owner['new']} ? 'Add' : 'Update') + ' Owner'" />
 								<input type="button" th:if="${owner.id}" th:onclick="'window.location.href=\'' + @{|/owners/${owner.id}|} + '\''" class="btn btn-danger" value="Cancel" />
-								<input type="button" th:unless="${owner.id}" th:onclick="'window.location.href=\'' + @{|/owners/find.html|} + '\''" class="btn btn-danger" value="Cancel" />
+								<input type="button" th:unless="${owner.id}" th:onclick="'window.location.href=\'' + @{|/owners|} + '\''" class="btn btn-danger" value="Cancel" />
 							</div>
 						</td>
 					</tr>

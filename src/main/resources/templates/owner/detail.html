@@ -38,7 +38,7 @@
 					<td></td>
 					<td>
 						<div class="form-actions pull-right">
-							<input type="button" class="btn btn-info" value="Edit Owner" onclick="window.location.href='ownerForm.html'" th:onclick="'window.location.href=\'' + @{|${owner.id}/edit.html|} + '\''" />
+							<input type="button" class="btn btn-info" value="Edit Owner" onclick="window.location.href='ownerForm.html'" th:onclick="'window.location.href=\'' + @{|/owners/${owner.id}/edit|} + '\''" />
 							<input type="button" class="btn btn-danger" value="Back to List" onclick="window.location.href='ownersList.html'" th:onclick="'window.location.href=\'' + @{|/owners/list.html?lastName=${session.searchLastName}|} + '\''" />
 						</div>
 					</td>

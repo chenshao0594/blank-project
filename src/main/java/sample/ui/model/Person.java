@@ -17,6 +17,7 @@ package sample.ui.model;
 
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -32,6 +33,9 @@ public class Person extends BaseEntity {
 	@Column(name = "last_name")
 	@NotEmpty
 	protected String lastName;
+	
+	@Transient
+	protected String displayName;
 
 	public String getFirstName() {
 		return this.firstName;
@@ -48,5 +52,11 @@ public class Person extends BaseEntity {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
+	public String getDisplayName() {
+		return this.lastName  + " " + this.firstName;
+	}
+	
+	
 
 }

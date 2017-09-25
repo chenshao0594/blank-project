@@ -15,8 +15,6 @@
  */
 package sample.ui.web;
 
-import java.util.Collection;
-
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -40,18 +38,12 @@ import org.springframework.web.servlet.ModelAndView;
 import sample.ui.model.Owner;
 import sample.ui.service.ClinicService;
 import sample.ui.service.OwnerService;
-
-/**
- * @author Juergen Hoeller
- * @author Ken Krebs
- * @author Arjen Poutsma
- * @author Michael Isvy
- * @author Arnaldo Piccinelli
- */
 @Controller
 @SessionAttributes(types = Owner.class)
 @RequestMapping(value = "/owners")
-public class OwnerController {
+public class OwnerController extends AbstractController<Owner, Long> {
+
+	
 
 	@Autowired
 	private ClinicService clinicService;
@@ -59,7 +51,11 @@ public class OwnerController {
 	@Autowired
 	private OwnerService ownerService;
 
-
+	public OwnerController(OwnerService service) {
+		
+		super(service, Owner.class);
+		this.ownerService = service;
+	}
 	@InitBinder
 	public void setAllowedFields(WebDataBinder dataBinder) {
 		dataBinder.setDisallowedFields("id");
@@ -154,10 +150,12 @@ public class OwnerController {
 	 *            the ID of the owner to display
 	 * @return a ModelMap with the model attributes for the view
 	 */
+	/*
 	@GetMapping("/{ownerId}")
 	public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
 		ModelAndView mav = new ModelAndView("owners/ownerDetails");
 		mav.addObject(this.clinicService.findOwnerById(ownerId));
 		return mav;
 	}
+	 */
 }

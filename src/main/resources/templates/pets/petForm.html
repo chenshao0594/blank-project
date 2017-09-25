@@ -66,10 +66,14 @@
 						</div>
 					</td>
 					<td>
-						<div class="controls">
-							<input type="text" class="form-control" th:field="*{birthDate}" id="birthDate_id"
-								 /> <label class="control-label"
-								th:errors="*{birthDate}">[error]</label>
+						<div class="row">
+							<div class='col-sm-12'>
+								<div class="controls">
+									<input type="text" class="form-control" th:field="*{birthDate}"
+										id="birthDate_id" /> <label class="control-label"
+										th:errors="*{birthDate}">[error]</label>
+								</div>
+							</div>
 						</div>
 					</td>
 				</tr>
@@ -106,11 +110,11 @@
 		</form>
 	</div>
 
-	<section th:replace="fragments/footer :: footer" class="footer">BEFORE COMMITTING
-	</section>
+	<section th:replace="fragments/footer :: footer" class="footer">BEFORE
+		COMMITTING</section>
 </body>
 <script type="text/javascript">
-	$(function () {
+	$(function() {
 		$('#birthDate_id').datetimepicker();
 	});
 </script>

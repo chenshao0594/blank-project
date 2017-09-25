@@ -5,5 +5,8 @@ import org.springframework.data.domain.Pageable;
 
 public interface AbstractService<E, K> {
 	Page<E> findAll(Pageable pageable);
-
+	E save(E entity);
+	void update(E entity);
+	void delete(K id);
+	E findOne(K id);
 }

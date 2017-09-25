@@ -50,15 +50,6 @@ public class PetController {
 	@Autowired
 	private ClinicService clinicService;
 
-	@ModelAttribute("types")
-	public Collection<PetType> populatePetTypes() {
-		return this.clinicService.findPetTypes();
-	}
-
-	@InitBinder
-	public void setAllowedFields(WebDataBinder dataBinder) {
-		dataBinder.setDisallowedFields("id");
-	}
 
 	@RequestMapping(value = "/owners/{ownerId}/pets/new", method = RequestMethod.GET)
 	public String initCreationForm(@PathVariable("ownerId") int ownerId, Model model) {

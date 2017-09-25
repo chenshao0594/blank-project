@@ -20,9 +20,7 @@ import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
-import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
-import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -31,9 +29,6 @@ import org.springframework.webflow.mvc.servlet.FlowHandlerMapping;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.webflow.view.AjaxThymeleafViewResolver;
 import org.thymeleaf.spring4.webflow.view.FlowAjaxThymeleafView;
-
-import sample.ui.model.Vets;
-import sample.ui.view.XmlViewResolver;
 
 /**
  * Configures View-related items.
@@ -61,13 +56,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		configurer.favorPathExtension(true).favorParameter(true);
 	}
 
-	@Bean(name = "marshallingXmlViewResolver")
-	public ViewResolver getMarshallingXmlViewResolver() {
-		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-		marshaller.setClassesToBeBound(new Class[] { Vets.class });
-		return new XmlViewResolver(marshaller);
-	}
-
+	
 	@Bean
 	public FilterRegistrationBean hiddenFilterRegistrationBean() {
 		return new FilterRegistrationBean(new HiddenHttpMethodFilter());

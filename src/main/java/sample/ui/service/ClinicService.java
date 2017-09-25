@@ -19,13 +19,9 @@ import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
 
-import sample.ui.model.Message;
 import sample.ui.model.Owner;
 import sample.ui.model.Pet;
 import sample.ui.model.PetType;
-import sample.ui.model.User;
-import sample.ui.model.UserProfile;
-import sample.ui.model.Vet;
 import sample.ui.model.Visit;
 
 /**
@@ -51,14 +47,7 @@ public interface ClinicService {
 
 	public void savePet(Pet pet) throws DataAccessException;
 
-	public Collection<PetType> findPetTypes() throws DataAccessException;
-
 	// Visit
 	public void saveVisit(Visit visit) throws DataAccessException;
-
-	// Vet
-	public Collection<Vet> findVets() throws DataAccessException;
-
-	
 
 }

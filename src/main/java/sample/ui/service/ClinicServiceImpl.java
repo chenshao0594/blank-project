@@ -18,7 +18,6 @@ package sample.ui.service;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,36 +25,18 @@ import org.springframework.transaction.annotation.Transactional;
 import sample.ui.model.Owner;
 import sample.ui.model.Pet;
 import sample.ui.model.PetType;
-import sample.ui.model.User;
-import sample.ui.model.UserProfile;
-import sample.ui.model.Vet;
 import sample.ui.model.Visit;
 import sample.ui.repository.AuthorityRepository;
 import sample.ui.repository.OwnerRepository;
 import sample.ui.repository.PetRepository;
-import sample.ui.repository.PetTypeRepository;
 import sample.ui.repository.UserRepository;
-import sample.ui.repository.VetRepository;
 import sample.ui.repository.VisitRepository;
 
-/**
- * Mostly used as a facade for all controllers Also a placeholder
- * for @Transactional and @Cacheable annotations
- *
- * @author Michael Isvy
- * @author Arnaldo Piccinelli
- */
 @Service("clinicService")
 public class ClinicServiceImpl implements ClinicService {
 
 	@Autowired
 	private PetRepository petRepository;
-
-	@Autowired
-	private PetTypeRepository petTypeRepository;
-
-	@Autowired
-	private VetRepository vetRepository;
 
 	@Autowired
 	private OwnerRepository ownerRepository;
@@ -70,11 +51,6 @@ public class ClinicServiceImpl implements ClinicService {
 	@Autowired
 	private AuthorityRepository authorityRepository;
 
-	@Override
-	@Transactional(readOnly = true)
-	public Collection<PetType> findPetTypes() throws DataAccessException {
-		return petTypeRepository.findAll();
-	}
 
 	@Override
 	@Transactional(readOnly = true)
@@ -112,12 +88,4 @@ public class ClinicServiceImpl implements ClinicService {
 		petRepository.save(pet);
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	@Cacheable(value = "vets")
-	public Collection<Vet> findVets() throws DataAccessException {
-		return vetRepository.findAll();
-	}
-
-	
 }

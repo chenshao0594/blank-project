@@ -36,14 +36,7 @@ import sample.ui.model.Visit;
  */
 public interface ClinicService {
 
-	// User
-	public User createUser();
-
-	public User saveUser(User user) throws DataAccessException;
-
-	public User findUser(String username) throws DataAccessException;
-
-	public UserProfile createUserProfile(User user);
+	
 
 	// Owner
 	public Owner findOwnerById(long id) throws DataAccessException;

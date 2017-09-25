@@ -119,28 +119,5 @@ public class ClinicServiceImpl implements ClinicService {
 		return vetRepository.findAll();
 	}
 
-	@Override
-	@Transactional(readOnly = true)
-	public User findUser(String useName) {
-		return userRepository.findByUsername(useName);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public User createUser() {
-		return new User();
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public UserProfile createUserProfile(User user) {
-		return new UserProfile(user);
-	}
-
-	@Override
-	@Transactional
-	public User saveUser(User user) {
-		user.addAuthority(authorityRepository.findByAuthority("ROLE_USER"));
-		return userRepository.save(user);
-	}
+	
 }

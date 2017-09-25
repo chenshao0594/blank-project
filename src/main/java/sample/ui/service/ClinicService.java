@@ -50,7 +50,6 @@ public interface ClinicService {
 
 	public void saveOwner(Owner owner) throws DataAccessException;
 
-	public Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException;
 
 	public Collection<Owner> findOwners() throws DataAccessException;
 
@@ -67,11 +66,6 @@ public interface ClinicService {
 	// Vet
 	public Collection<Vet> findVets() throws DataAccessException;
 
-	// Message
-	public Collection<Message> findMessages() throws DataAccessException;
-
-	public Message saveMessage(Message message) throws DataAccessException;
-
-	public Message findMessage(Long id) throws DataAccessException;
+	
 
 }

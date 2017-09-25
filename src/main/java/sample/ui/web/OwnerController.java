@@ -99,18 +99,18 @@ public class OwnerController {
 
 
 	@GetMapping(value = "/list")
-	public String processFindForm(Owner owner, BindingResult result, Model model, HttpSession session) {
-		Collection<Owner> results = null;
+	public String processFindForm(Owner owner, BindingResult result, Model model, HttpSession session, Pageable pageable) {
+		Page<Owner> page = null;
 
 		// find owners by last name
 		if (StringUtils.isEmpty(owner.getLastName())) {
 			// allow parameterless GET request for /owners to return all records
-			results = this.clinicService.findOwners();
+			page = this.ownerService.findAll(pageable);
 		} else {
-			results = this.clinicService.findOwnerByLastName(owner.getLastName());
+			page = this.ownerService.findAllByLastNameIgnoringCase(owner.getLastName(), pageable);
 		}
 
-		if (results.size() < 1) {
+		if (page.getContent().size() < 1) {
 			// no owners found
 			result.rejectValue("lastName", "notFound", new Object[] { owner.getLastName() }, "not found");
 			return "owners/findOwners";
@@ -118,13 +118,13 @@ public class OwnerController {
 
 		session.setAttribute("searchLastName", owner.getLastName());
 
-		if (results.size() > 1) {
+		if (page.getContent().size() > 1) {
 			// multiple owners found
-			model.addAttribute("owners", results);
+			model.addAttribute("page", page);
 			return "owners/ownersList";
 		} else {
 			// 1 owner found
-			owner = results.iterator().next();
+			owner = page.getContent().get(0);
 			return "redirect:/owners/" + owner.getId();
 		}
 	}

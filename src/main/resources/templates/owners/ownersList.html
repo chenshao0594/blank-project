@@ -36,7 +36,9 @@
 					<thead class="thead-default">
 						<tr>
 							<th><a class="sorted" sd:pagination-sort="id">Id</a></th>
-							<th><a class="sorted" sd:pagination-sort="firstName">first
+							<th><a class="sorted" sd:pagination-sort="firstName">First
+									Name</a></th>
+							<th><a class="sorted" sd:pagination-sort="lastName">Last
 									Name</a></th>
 							<th><a class="sorted" sd:pagination-sort="city">City</a></th>
 							<th><a class="sorted" sd:pagination-sort="address">Address
@@ -48,12 +50,20 @@
 					<tbody>
 						<tr th:each="row : ${page}">
 							<th scope="row" th:text="${row.id}">1</th>
-							<td th:text="${row.firstName}">name</td>
-							<td th:text="${row.city}">Category</td>
-							<td th:text="${row.address}">Sale Price</td>
-							<td th:text="${row.telephone}">Retail Price</td>
+							<td th:text="${row.firstName}">first name</td>
+							<td th:text="${row.lastName}">last name</td>
+							<td th:text="${row.city}">city</td>
+							<td th:text="${row.address}">address</td>
+							<td th:text="${row.telephone}">telephone</td>
 							<td>
-								<div class="flex-btn-group-container">*****</div>
+								<div class="flex-btn-group-container">
+
+									<a class="btn btn-success btn-sm"
+										th:href="@{/owners/{ownerId}(ownerId=${row.id})}">
+										<span class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
+									</a> &nbsp;
+
+								</div>
 							</td>
 						</tr>
 					</tbody>

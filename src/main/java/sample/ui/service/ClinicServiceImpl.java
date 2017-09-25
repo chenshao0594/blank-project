@@ -23,7 +23,6 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import sample.ui.model.Message;
 import sample.ui.model.Owner;
 import sample.ui.model.Pet;
 import sample.ui.model.PetType;
@@ -32,7 +31,6 @@ import sample.ui.model.UserProfile;
 import sample.ui.model.Vet;
 import sample.ui.model.Visit;
 import sample.ui.repository.AuthorityRepository;
-import sample.ui.repository.MessageRepository;
 import sample.ui.repository.OwnerRepository;
 import sample.ui.repository.PetRepository;
 import sample.ui.repository.PetTypeRepository;
@@ -65,8 +63,6 @@ public class ClinicServiceImpl implements ClinicService {
 	@Autowired
 	private VisitRepository visitRepository;
 
-	@Autowired
-	private MessageRepository messageRepository;
 
 	@Autowired
 	private UserRepository userRepository;
@@ -84,12 +80,6 @@ public class ClinicServiceImpl implements ClinicService {
 	@Transactional(readOnly = true)
 	public Owner findOwnerById(long id) throws DataAccessException {
 		return ownerRepository.findById(id);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException {
-		return ownerRepository.findByLastNameStartingWithIgnoreCase(lastName);
 	}
 
 	@Override
@@ -127,24 +117,6 @@ public class ClinicServiceImpl implements ClinicService {
 	@Cacheable(value = "vets")
 	public Collection<Vet> findVets() throws DataAccessException {
 		return vetRepository.findAll();
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Collection<Message> findMessages() throws DataAccessException {
-		return messageRepository.findAll();
-	}
-
-	@Override
-	@Transactional
-	public Message saveMessage(Message message) throws DataAccessException {
-		return messageRepository.save(message);
-	}
-
-	@Override
-	@Transactional(readOnly = true)
-	public Message findMessage(Long id) throws DataAccessException {
-		return messageRepository.findById(id);
 	}
 
 	@Override

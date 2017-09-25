@@ -38,17 +38,17 @@ import org.springframework.core.style.ToStringCreator;
 public class Owner extends Person {
 
 	private static final long serialVersionUID = 447728202717826028L;
-
+	
+	@NotEmpty
 	@Column(name = "address")
-	@NotEmpty
 	private String address;
-
+	
+	@NotEmpty
 	@Column(name = "city")
-	@NotEmpty
 	private String city;
-
-	@Column(name = "telephone")
+	
 	@NotEmpty
+	@Column(name = "telephone")
 	@Digits(fraction = 0, integer = 10)
 	private String telephone;
 

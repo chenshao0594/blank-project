@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
@@ -14,24 +13,24 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import sample.ui.service.AbstractService;
 
-public class AbstractController<E, K> {
+public abstract class AbstractController<E, K> {
 	private final Logger LOGGER = LoggerFactory.getLogger(AbstractController.class);
 
 	private final AbstractService<E, K> service;
+	
 	private final Class entityClass;
+	
 	private final String sectionKey;
 
 	public AbstractController(AbstractService<E, K> service, Class entityClass) {
 		this.service = service;
 		this.entityClass = entityClass;
 		this.sectionKey = entityClass.getSimpleName().toLowerCase();
-		System.out.println("sectionKey is " + sectionKey);
 	}
 	
 	@InitBinder
@@ -64,8 +63,8 @@ public class AbstractController<E, K> {
 		return this.sectionKey + "/dialog";
 	}
 	
-	@GetMapping("/{Id}")
-	public ModelAndView showOne(@PathVariable("Id") K id) {
+	@GetMapping("/{id}")
+	public ModelAndView showOne(@PathVariable("id") K id) {
 		ModelAndView mav = new ModelAndView(this.sectionKey+"/detail");
 		mav.addObject(this.service.findOne(id));
 		return mav;

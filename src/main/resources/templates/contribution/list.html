@@ -10,18 +10,17 @@
 		COMMITTING</div>
 	<div class="container" role="main">
 		<div class="starter-template">
-			<h2>Owners</h2>
+			<h2>Contributions</h2>
 		</div>
 		<div class="row">
-				<form  action="owners/search.html" th:object="${owner}"
-					th:action="@{/owners/search}" method="get"
-					class="form-horizontal" id="search-owner-form">
-					
+				<form  action="contributions/search.html" th:object="${contribution}"
+					th:action="@{/contributions/search}" method="get"
+					class="form-horizontal" id="search-contribution-form">
 					<table class="table table-striped">
 						<tr>
 							<td class="col-sm-1">
 								<div class="control-group">
-									<label class="control-label">Last Name</label>
+									<label class="control-label">Name</label>
 								</div>
 							</td>
 							<td class="col-sm-2">
@@ -34,8 +33,8 @@
 								<div class="form-actions pull-right">
 									<button type="submit" class="btn btn-success"><span
 							class="glyphicon glyphicon-search"></span>  Search</button>
-									<a th:href="@{'/owners/new'}" href="ownerForm.html"
-										class="btn btn-success">Add Owner</a>
+									<a th:href="@{'/contributions/new'}" href="contributionForm.html"
+										class="btn btn-success"><i class="fa fa-plus" aria-hidden="true"></i>  Add contribution</a>
 								</div>
 							</td>
 						</tr>
@@ -54,31 +53,25 @@
 					<thead class="thead-default">
 						<tr>
 							<th><a class="sorted" sd:pagination-sort="id">Id</a></th>
-							<th><a class="sorted" sd:pagination-sort="firstName">First
+							<th><a class="sorted" sd:pagination-sort="name">
 									Name</a></th>
-							<th><a class="sorted" sd:pagination-sort="lastName">Last
-									Name</a></th>
-							<th><a class="sorted" sd:pagination-sort="city">City</a></th>
-							<th><a class="sorted" sd:pagination-sort="address">Address
-							</a></th>
-							<th>telephone</th>
 							<th>Operation</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr th:each="row : ${page}">
 							<th scope="row" th:text="${row.id}">1</th>
-							<td th:text="${row.firstName}">first name</td>
-							<td th:text="${row.lastName}">last name</td>
-							<td th:text="${row.city}">city</td>
-							<td th:text="${row.address}">address</td>
-							<td th:text="${row.telephone}">telephone</td>
+							<td th:text="${row.name}"> name</td>
 							<td>
 								<div class="flex-btn-group-container">
 
 									<a class="btn btn-success btn-sm"
-										th:href="@{/owners/{ownerId}(ownerId=${row.id})}"> <span
+										th:href="@{/contributions/{contributionId}(contributionId=${row.id})}"> <span
 										class="fa fa-eye"></span> <span class="hidden-md-down">View</span>
+									</a> &nbsp;
+									<a class="btn btn-success btn-sm"
+										th:href="@{/contributions/{contributionId}/download(contributionId=${row.id})}"> <span
+										class="fa fa-eye"></span> <span class="hidden-md-down">Download</span>
 									</a> &nbsp;
 
 								</div>

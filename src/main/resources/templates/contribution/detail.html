@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:ddl="http://www.thymeleaf.org/dandelion"
+	xmlns:dt="http://github.com/dandelion/datatables"
+	ddl:bundle-includes="bootstrap3" lang="en">
+
+<head th:replace="fragments/headTag :: headTag">
+<!-- REPLACE BEFORE COMMITTING -->
+</head>
+
+<body role="document">
+	<div th:include="fragments/navBar" th:remove="tag">REPLACE BEFORE
+		COMMITTING</div>
+	<div class="container">
+		<div class="starter-template">
+			<h2>Contribution Information</h2>
+		</div>
+
+		<div role="alert" th:if="${statusMessage}"
+			th:class="'alert ' + ${statusMessageClass}?: 'alert-info'"
+			th:text="${statusMessage}"></div>
+
+		<table class="table table-striped">
+			<tr>
+				<th class="col-sm-1">Name</th>
+				<td class="col-sm-2"><b th:text="${contribution.name}"></b></td>
+			</tr>
+			<tr>
+				<th class="col-sm-1">Brief</th>
+				<td class="col-sm-2"><b th:text="${contribution.brief}"></b></td>
+			</tr>
+			<tr>
+				<th class="col-sm-1">file Name</th>
+				<td class="col-sm-2"><b th:text="${contribution.fileName}">[file
+						name]</b></td>
+			</tr>
+			<tr>
+				<th class="col-sm-1">file Type</th>
+				<td class="col-sm-2"><b th:text="${contribution.contentType}">[content
+						type]</b></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<div class="form-actions pull-right">
+						<input type="button" class="btn btn-info"
+							value="Edit Contribution"
+							onclick="window.location.href='contributionForm.html'"
+							th:onclick="'window.location.href=\'' + @{|/contributions/${contribution.id}/edit|} + '\''" />
+						<input type="button" class="btn btn-danger" value="Back to List"
+							onclick="window.location.href='contributionsList.html'"
+							th:onclick="'window.location.href=\'' + @{|/contributions|} + '\''" />
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div class="starter-template">
+		<h2>Comments</h2>
+
+		<a class="btn btn-sm btn-success pull-right"
+			href="../pets/petForm.html" th:href="@{|/contributions/${contribution.id}/comments/new|}"><i class="fa fa-plus" aria-hidden="true"></i>Add Comments</a> <br />
+		<br />
+
+		<table class="table">
+			<tr th:each="comment : ${contribution.comments}">
+				<td>
+					<table class="table table-striped">
+						<tr>
+							<th class="col-sm-1">content</th>
+							<td class="col-sm-1" th:text="${comment.content}">[content]</td>
+						</tr>
+					</table>
+				</td>
+				<td><a class="btn btn-sm btn-info pull-left"
+					href="../pets/petForm.html"
+					th:href="@{|/contributions/${contribution.id}/comments/edit|}">Edit Comment</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+
+
+	<table th:replace="fragments/footer :: footer" class="footer">REPLACE
+		BEFORE COMMITTING
+	</table>
+</body>
+
+</html>

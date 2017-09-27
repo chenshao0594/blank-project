@@ -22,7 +22,8 @@
 						class="glyphicon glyphicon-warning-sign"></span> Error</a></li>
 				
 				<li sec:authorize="hasRole('ROLE_USER')">
-					<a>投稿</a>
+					<a href="../contributions" th:href="@{/contributions}"><span
+						class="fa fa-user-circle-o fa-fw" aria-hidden="true"></span>投稿</a>
 				</li>
 				<li sec:authorize="hasRole('ROLE_ADMIN')">
 					<a>Must have ROLE_ADMIN</a>

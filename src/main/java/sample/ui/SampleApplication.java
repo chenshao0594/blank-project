@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
 @EnableAutoConfiguration
 @EnableConfigurationProperties
 public class SampleApplication {
-
 	public static void main(String[] args) throws Exception {
 		SpringApplication springApplication = new SpringApplication(SampleApplication.class);
 		springApplication.addListeners( );

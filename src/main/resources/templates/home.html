@@ -1,10 +1,15 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en">
+<head th:replace="fragments/headTag :: headTag">
+<!-- REPLACE BEFORE COMMITTING -->
 </head>
-<body>
-<h1>Home Page ...</h1>
+
+<body role="document">
+	<div th:include="fragments/navBar" th:remove="tag">REPLACE BEFORE
+		COMMITTING</div>
+	<div class="container" role="main">
+	<h1>home page...</h1>
+	</div>
 </body>
 </html>

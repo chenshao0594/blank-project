@@ -30,16 +30,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.blank.model.Owner;
-import com.blank.service.ClinicService;
 import com.blank.service.OwnerService;
 
 @Controller
 @SessionAttributes(types = Owner.class)
 @RequestMapping(value = "/owners")
 public class OwnerController extends AbstractController<Owner, Long> {
-
-	@Autowired
-	private ClinicService clinicService;
 
 	@Autowired
 	private OwnerService ownerService;

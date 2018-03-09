@@ -15,6 +15,7 @@
  */
 package com.blank.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -31,9 +32,12 @@ import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 import org.springframework.core.style.ToStringCreator;
 
+import com.blank.common.domain.DomainMeta;
+
 @Entity
 @Table(name = "owners")
-public class Owner extends Person {
+@DomainMeta(pluralName = "owners")
+public class Owner extends Person implements Serializable {
 
 	private static final long serialVersionUID = 447728202717826028L;
 
@@ -48,6 +52,10 @@ public class Owner extends Person {
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	private Set<Pet> pets;
+
+	public Owner() {
+
+	}
 
 	public String getAddress() {
 		return this.address;

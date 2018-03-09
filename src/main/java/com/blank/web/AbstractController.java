@@ -14,6 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.blank.common.domain.DomainMetaBuilder;
+import com.blank.common.domain.DomainMetadata;
+import com.blank.model.Owner;
 import com.blank.service.AbstractService;
 
 public abstract class AbstractController<E, K> {
@@ -58,6 +61,8 @@ public abstract class AbstractController<E, K> {
 	@GetMapping(value = "/new")
 	public String initCreationForm(Model model) throws InstantiationException, IllegalAccessException {
 		model.addAttribute(entityClass.newInstance());
+		DomainMetadata metadata = DomainMetaBuilder.build(Owner.class);
+		model.addAttribute("domainMetadata", metadata);
 		return this.sectionKey + "/dialog";
 	}
 

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
+	layout:decorate="~{layouts/content}">
+<head>
+</head>
+<body>
+<body role="document" onload="$('input[name=firstName]').focus();">
+	<section layout:fragment="content">
+		<h4 class="mb-3">
+			<span th:if="${__${domainMetadata.name}__['new']}" th:remove="tag">Create</span><span
+				th:unless="${__${domainMetadata.name}__['new']}" th:remove="tag">Update</span>
+			<span th:text="#{__${domainMetadata.name}__.plural}">Billing
+				address</span>
+		</h4>
+		<div class="row">
+			<div class="col-md-10 offset-md-1 order-md-1">
+				<div role="alert" th:if="${statusMessage}"
+					th:class="'alert ' + ${statusMessageClass}?: 'alert-info'"
+					th:text="${statusMessage}"></div>
+				<form th:object="${__${domainMetadata.name}__}" method="post"
+					th:action="@{/__${domainMetadata.pluralName}__}"
+					class="needs-validation" th:id="__${domainMetadata.name}__-form"
+					novalidate>
+					<div class="row">
+						<th:block th:each="each, status: ${domainMetadata.dialogFields}">
+							<div class="col-md-6 mb-3">
+								<label for="${each.name}" th:text="__${each.translationKey}__">Field
+									Name</label>
+								<th:block th:switch="${each.type}">
+									<th:block th:case="string">
+										<input type="text" class="form-control" id="${each.name}_id"
+											th:field="*{__${each.name}__}" placeholder="" value=""
+											required>
+										<div class="invalid-feedback">
+											Valid <span th:text="__${each.translationKey}__"></span> is
+											required.
+										</div>
+									</th:block>
+									<th:block th:case="long">
+										<input type="text" class="form-control" id="${each.name}_id"
+											th:field="*{__${each.name}__}" placeholder="" value=""
+											required>
+										<div class="invalid-feedback">
+											Valid <span th:text="__${each.translationKey}__"></span> is
+											required.
+										</div>
+									</th:block>
+									<th:block th:case="*">
+										<input type="text" class="form-control" id="${each.name}_id"
+											th:field="*{__${each.name}__}" placeholder="" value=""
+											required>
+										<div class="invalid-feedback">
+											Valid <span th:text="__${each.translationKey}__"></span> is
+											required.
+										</div>
+
+									</th:block>
+								</th:block>
+							</div>
+						</th:block>
+					</div>
+					<hr class="mb-4">
+					<div class="form-actions pull-right">
+						<input type="submit" class="btn btn-success" 	th:value="#{common.new}" />
+						<input type="button" th:if="${__${domainMetadata.name}__.id}"
+							th:onclick="'window.location.href=\'' + @{|/__${domainMetadata.pluralName}__/${__${domainMetadata.name}__.id}|} + '\''"
+							class="btn btn-danger" th:value="#{common.cancel}" /> <input type="button"
+							th:unless="${__${domainMetadata.name}__.id}"
+							th:onclick="'window.location.href=\'' + @{|/__${domainMetadata.pluralName}__|} + '\''"
+							class="btn btn-danger" th:value="#{common.cancel}" />
+					</div>
+				</form>
+			</div>
+		</div>
+
+
+	</section>
+</body>
+</html>

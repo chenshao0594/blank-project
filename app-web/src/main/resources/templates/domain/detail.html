@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sd="http://www.thymeleaf.org/spring-data" lang="en"
+	layout:decorate="~{layouts/content}">
+<head>
+</head>
+<body>
+<body role="document">
+	<section layout:fragment="content">
+		<h4 class="mb-3">
+			<span th:text="#{__${domainMetadata.name}__.plural}"> Domain Plural</span>
+		</h4>
+		<div class="row">
+			<div class="col-md-10 offset-md-1 order-md-1">
+				<div role="alert" th:if="${statusMessage}"
+					th:class="'alert ' + ${statusMessageClass}?: 'alert-info'"
+					th:text="${statusMessage}"></div>
+				<fieldset>
+					<legend class="section" th:text="#{common.basicInfo}">Basic Info</legend>
+					<hr class="mb-4">
+					<dl class="row justify-content-md-left">
+						<th:block th:each="field : ${domainMetadata.dialogFields}">
+							<dt class="col-md-2 text-right"
+								th:text="__${field.translationKey}__">Field Name</dt>
+							<dd class="col-md-4 text-left"
+								th:text="${item.__${field.name}__}">Field Value</dd>
+						</th:block>
+					</dl>
+				</fieldset>
+				<fieldset>
+					<legend class="section" th:text="#{common.auditInfo}">Audit Info</legend>
+					<hr class="mb-4">
+					<dl class="row justify-content-md-center">
+						<dt class="col-md-2 text-right" th:text="#{common.createdBy}">Created By</dt>
+						<dd class="col-md-4 text-left" th:text="${item.createdBy}">Code</dd>
+						<dt class="col-md-2 text-right" th:text="#{common.createdDate}">createdDate</dt>
+						<dd class="col-md-4 text-left" th:text="${item.createdDate}">createdDate</dd>
+						<dt class="col-md-2 text-right" th:text="#{common.lastModifiedBy}">Last Modified By</dt>
+						<dd class="col-md-4 text-left" th:text="${item.lastModifiedBy}">Code</dd>
+						<dt class="col-md-2 text-right"  th:text="#{common.lastModifiedDate}">lastModifiedDate</dt>
+						<dd class="col-md-4 text-left" th:text="${item.lastModifiedDate}">LastModifiedDate</dd>
+					</dl>
+				</fieldset>
+				<hr class="mb-4">
+				<div class="form-actions pull-right">
+				
+				<a th:href="@{'/{pluralName}/{id}/edit'(pluralName=${domainMetadata.pluralName},id=${item.id})}" 
+								class="btn btn-success" th:text="#{common.edict}"> Add <span>Domain</span>
+								</a>
+					<input
+						type="button"
+						th:onclick="'window.location.href=\'' + @{/__${domainMetadata.pluralName}__/} + '\''"
+						class="btn btn-danger" th:value="#{common.cancel}" /> 
+				</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>

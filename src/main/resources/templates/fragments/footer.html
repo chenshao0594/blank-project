@@ -1,21 +1,41 @@
-<table th:fragment="footer" class="footer" style="width: 100%;">
-	<tr>
-		<td></td>
-		<td style="align: right; aborder-style: solid; aborder-width: 5px;">
-			<img src="../../images/springsource-logo.png"
-				th:src="@{/images/springsource-logo.png}"
-				alt="Sponsored by SpringSource" align="right" style="aborder-style: solid; aborder-width: 5px;" />
-		</td>
-	</tr>
-</table>
-<img th:src="@{/images/banner-graphic.png}" src="../../images/banner-graphic.png" class="img-responsive" width="100%" />
-<table th:replace="fragments/footer :: footer" class="footer">
-	<tr>
-		<td></td>
-		<td align="right">
-			<img src="../../images/springsource-logo.png"
-				th:src="@{/images/springsource-logo.png}"
-				alt="Sponsored by SpringSource" />
-		</td>
-	</tr>
-</table>
+<section th:fragment="footer">
+	<p class="mb-1">&copy; 2017-2018 Company Name</p>
+	<ul class="list-inline">
+		<li class="list-inline-item"><a href="#">Privacy</a></li>
+		<li class="list-inline-item"><a href="#">Terms</a></li>
+		<li class="list-inline-item"><a href="#">Support</a></li>
+	</ul>
+	<script src="/webjars/jquery/3.3.1-1/jquery.min.js"></script>
+	<script src="/webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+	<script src="https://getbootstrap.com/assets/js/vendor/popper.min.js"></script>
+	<script src="/webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
+	<script src="/webjars/momentjs/2.18.1/min/moment.min.js"></script>
+	<script
+		src="/webjars/Eonasdan-bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript"
+		src="https://cdnjs.cloudflare.com/ajax/libs/holder/2.9.4/holder.min.js"></script>
+	<script>
+		// Example starter JavaScript for disabling form submissions if there are invalid fields
+		(function() {
+			'use strict';
+			window.addEventListener('load',
+					function() {
+						// Fetch all the forms we want to apply custom Bootstrap validation styles to
+						var forms = document
+								.getElementsByClassName('needs-validation');
+						// Loop over them and prevent submission
+						var validation = Array.prototype.filter.call(forms,
+								function(form) {
+									form.addEventListener('submit', function(
+											event) {
+										if (form.checkValidity() === false) {
+											event.preventDefault();
+											event.stopPropagation();
+										}
+										form.classList.add('was-validated');
+									}, false);
+								});
+					}, false);
+		})();
+	</script>
+</section>

@@ -10,9 +10,11 @@ import org.thymeleaf.dialect.springdata.SpringDataDialect;
 import org.thymeleaf.extras.springsecurity4.dialect.SpringSecurityDialect;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+import nz.net.ultraq.thymeleaf.LayoutDialect;
+
 @Configuration
 public class ThymeleafConfig {
-	
+
 	private final Logger LOGGER = LoggerFactory.getLogger(ThymeleafConfig.class);
 
 	@Bean
@@ -38,10 +40,14 @@ public class ThymeleafConfig {
 		return new SpringSecurityDialect();
 	}
 
-//	@Bean
-//	public ShoppayDialect shopDialect() {
-//		return new ShoppayDialect();
-//	}
+	// @Bean
+	public LayoutDialect layoutDialect() {
+		return new LayoutDialect();
+	}
 
+	// @Bean
+	// public ShoppayDialect shopDialect() {
+	// return new ShoppayDialect();
+	// }
 
 }

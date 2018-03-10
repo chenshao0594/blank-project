@@ -36,7 +36,7 @@
 		<dandelion.datatables.version>1.1.0</dandelion.datatables.version>
 		<dandelion.ehcache.version>1.1.1</dandelion.ehcache.version>
 		<thymeleaf.version>3.0.9.RELEASE</thymeleaf.version>
-		<thymeleaf-layout-dialect.version>2.2.2</thymeleaf-layout-dialect.version>
+		<thymeleaf-layout-dialect.version>2.3.0</thymeleaf-layout-dialect.version>
 	</properties>
 
 	<dependencies>
@@ -90,13 +90,16 @@
 			</exclusions>
 		</dependency>
 
-		<!-- Thymeleaf Spring Security Dialect -->
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity4</artifactId>
 			<version>3.0.2.RELEASE</version>
 		</dependency>
-		<!-- Thymeleaf - Internet Explorer conditional comments -->
+		<dependency>
+			<groupId>nz.net.ultraq.thymeleaf</groupId>
+			<artifactId>thymeleaf-layout-dialect</artifactId>
+			<version>2.3.0</version>
+		</dependency>
 		<dependency>
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-conditionalcomments</artifactId>

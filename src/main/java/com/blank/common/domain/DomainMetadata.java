@@ -1,20 +1,21 @@
 package com.blank.common.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 public class DomainMetadata {
 	private String name;
 	private String pluralName;
 	private List<FieldMeta> metaFields;
-	private String[] listFields;
+	private List<String> listFields;
 	private String[] serachFields;
 	private PermissionMeta permissionInfo;
 
-	public String[] getListFields() {
+	public List<String> getListFields() {
 		return listFields;
 	}
 
-	public void setListFields(String[] listFields) {
+	public void setListFields(List<String> listFields) {
 		this.listFields = listFields;
 	}
 
@@ -56,6 +57,13 @@ public class DomainMetadata {
 
 	public void setPluralName(String pluralName) {
 		this.pluralName = pluralName;
+	}
+
+	@Override
+	public String toString() {
+		return "DomainMetadata [name=" + name + ", pluralName=" + pluralName + ", metaFields=" + metaFields
+				+ ", listFields=" + listFields + ", serachFields=" + Arrays.toString(serachFields) + ", permissionInfo="
+				+ permissionInfo + "]";
 	}
 
 }

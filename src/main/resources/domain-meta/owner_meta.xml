@@ -1,0 +1,13 @@
+<domain-meta>
+	<name>owner</name>
+	<pluralName>owners
+	</pluralName>
+	<listFields>id;displayName;telephone;city;address</listFields>
+	<searchFields></searchFields>
+	<permissions>
+		<permission>
+			<role>user</role>
+			<operation>update</operation>
+		</permission>
+	</permissions>
+</domain-meta>

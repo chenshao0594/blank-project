@@ -22,7 +22,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.blank.model.Owner;
+import com.blank.domain.Owner;
 
 /**
  * Repository class for <code>Owner</code> domain objects All method names are

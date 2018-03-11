@@ -17,10 +17,5 @@
 	<logger name="org.springframework.webflow" level="FINE" />
 	<logger name="com.blank.config.WebFlowConfig" level="FINE" />
 	<logger name="com.blank.service" level="FINE" />
-	<!-- <logger name="org.springframework.security" level="FINE"/> -->
-	<!-- <logger name="org.springframework.security" level="FINE"/> -->
-	<!-- <logger name="org.hibernate.tool.hbm2ddl.SchemaExport" level="FINE"/> -->
-	<!-- <logger name="org.hibernate.jpa.internal.util.LogHelper" level="FINE"/> -->
-	<!-- <logger name="org.hsqldb.jdbc" level="FINE"/> -->
 
 </configuration>

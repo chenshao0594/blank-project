@@ -1,0 +1,17 @@
+<domain-meta>
+	<name>user</name>
+	<pluralName>users</pluralName>
+	<listPage>user/list</listPage>
+	<detailPage></detailPage>
+	<dialogPage></dialogPage>
+	<listFields>id;name;email;userProfile.city</listFields>
+	<detailFields>id;name;email;authorities;userProfile.city</detailFields>
+	<dialogFields>name;email;userProfile.city</dialogFields>
+	<searchFields>name;email</searchFields>
+	<permissions>
+		<permission>
+			<role>user</role>
+			<operation>update</operation>
+		</permission>
+	</permissions>
+</domain-meta>

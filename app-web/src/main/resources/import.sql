@@ -9,6 +9,10 @@ insert into users (id, email, username, password, name, enabled, account_expired
 insert into users (id, email, username, password, name, enabled, account_expired, account_locked, credentials_expired,created_by,created_date,last_modified_by,last_modified_date) values (5, 'jeremy@aol.com', 'jeremy', '$2a$04$Fiy/tKQ6j5Easl1YeN1PfuIr6YyCham5Ezm/992Wq3y2rhvyVnAfS', 'Jeremy', true, false, false, false,'system', CURRENT_TIMESTAMP, 'system',  CURRENT_TIMESTAMP);
 insert into users (id, email, username, password, name, enabled, account_expired, account_locked, credentials_expired,created_by,created_date,last_modified_by,last_modified_date) values (6, 'scott@aol.com', 'scott', '$2a$04$BdckjEcXl9cjbG.1WHoVluNNtlxKhUcykpS4ts.TVymm9pb/ZZmFu', 'Scott', true, false, false, false,'system', CURRENT_TIMESTAMP, 'system',  CURRENT_TIMESTAMP);
 
+
+
+insert into user_profiles (id,address, city,created_by,created_date,last_modified_by,last_modified_date) values (1,'scott@aol.com', 'scott','system', CURRENT_TIMESTAMP, 'system',  CURRENT_TIMESTAMP);
+
 -- ----------------------------------------------------------
 -- Authorities
 -- ----------------------------------------------------------

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.blank.common.service.AbstractServiceImpl;
-import com.blank.model.Owner;
+import com.blank.domain.Owner;
 import com.blank.repository.OwnerRepository;
 
 @Service("ownerService")

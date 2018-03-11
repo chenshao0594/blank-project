@@ -1,0 +1,14 @@
+<section th:fragment="image">
+	<input type="file" />
+	<script type="text/javascript">
+document.querySelector('input').addEventListener('change', function(){
+    var reader = new FileReader();
+    reader.onload = function(){
+        var arrayBuffer = this.result;
+      console.log(arrayBuffer);
+        document.querySelector('#result').innerHTML = arrayBuffer + '  '+arrayBuffer.byteLength;
+        }
+    reader.readAsArrayBuffer(this.files[0]);
+  }, false);
+</script>
+</section>

@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.UserDetailsManager;
 
-import com.blank.model.User;
+import com.blank.domain.User;
 import com.blank.repository.UserRepository;
 
 public class DBDrivenUserDetailsManager implements UserDetailsManager {

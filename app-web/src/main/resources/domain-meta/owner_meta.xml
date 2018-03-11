@@ -4,10 +4,10 @@
 	<listPage></listPage>
 	<detailPage></detailPage>
 	<dialogPage></dialogPage>
-	<listFields>id;displayName;telephone;city; address</listFields>
+	<listFields>id;displayName;telephone;city;address</listFields>
 	<detailFields>id;displayName;telephone;city;address</detailFields>
-	<dialogFields>firstName;lastName;telephone;city ; address</dialogFields>
-	<searchFields>firstName,lastName,telephone,city, address</searchFields>
+	<dialogFields>firstName;lastName;telephone;city;address</dialogFields>
+	<searchFields>firstName;lastName;telephone;city;address</searchFields>
 	<permissions>
 		<permission>
 			<role>user</role>

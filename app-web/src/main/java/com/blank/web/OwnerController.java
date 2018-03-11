@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.blank.common.controller.AbstractController;
-import com.blank.model.Owner;
+import com.blank.domain.Owner;
 import com.blank.service.OwnerService;
 
 @Controller

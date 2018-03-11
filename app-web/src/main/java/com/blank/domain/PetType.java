@@ -13,21 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.blank.repository;
+package com.blank.domain;
 
-import java.util.Collection;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-import org.springframework.dao.DataAccessException;
-import org.springframework.data.jpa.repository.JpaRepository;
+/**
+ * @author Juergen Hoeller
+ */
+@Entity
+@Table(name = "pet_types")
+public class PetType extends NamedEntity {
 
-import com.blank.domain.User;
-
-public interface UserRepository extends JpaRepository<User, Long> {
-
-	Collection<User> findByNameLike(String name) throws DataAccessException;
-
-	User findByUsername(String username) throws DataAccessException;
-
-	boolean existsById(Long id) throws DataAccessException;
+	private static final long serialVersionUID = -6307992799720112368L;
 
 }

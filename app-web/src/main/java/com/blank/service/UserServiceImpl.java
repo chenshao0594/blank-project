@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.blank.common.service.AbstractServiceImpl;
-import com.blank.model.User;
-import com.blank.model.UserProfile;
+import com.blank.domain.User;
+import com.blank.domain.UserProfile;
 import com.blank.repository.AuthorityRepository;
 import com.blank.repository.UserRepository;
 

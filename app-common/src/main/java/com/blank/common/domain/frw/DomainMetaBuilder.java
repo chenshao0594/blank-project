@@ -2,16 +2,13 @@ package com.blank.common.domain.frw;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
 import javax.persistence.Embedded;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -20,117 +17,142 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.FieldUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
-import org.hibernate.annotations.common.reflection.java.generics.TypeUtils;
-import org.springframework.beans.BeanUtils;
+
+import com.blank.common.domain.config.DetailPageConfig;
+import com.blank.common.domain.config.DomainMetaConfig;
+import com.blank.common.model.FieldInfo;
 
 public class DomainMetaBuilder {
 	private final static String META_PATH = "domain-meta/{name}_meta.xml";
-	private final static String LIST_PAGE_DEFAULT = "domain/list";
-	private final static String DIALOG_PAGE_DEFAULT = "domain/dialog";
-	private final static String DETAIL_PAGE_DEFAULT = "domain/detail";
 
-	public static DomainMetadata build(Class clazz) {
-		DomainMetadata metadata = new DomainMetadata();
+	public static DomainMeta build(final Class<?> clazz) {
+
+		// build field Map
+		Map<String, FieldInfo> fieldMap = buildFieldMap(clazz);
+		Map<String, FieldMeta> propertiesMap = buildRootFieldMeta(clazz);
+
 		DomainMetaConfig metaConfig = buildMetaConfig(clazz);
-		BeanUtils.copyProperties(metaConfig, metadata);
-		List<FieldMeta> rootFieldMeta = buildRootFieldMeta(clazz);
-		Map<String, FieldMeta> fieldMap = new HashMap<String, FieldMeta>();
-		rootFieldMeta.forEach((obj) -> {
-			fieldMap.put(obj.getName(), obj);
-		});
-
-		if (!StringUtils.isBlank(metaConfig.getListFields())) {
-			String[] listFields = metaConfig.getListFields().split(";");
-			List<FieldMeta> listFieldMeta = new LinkedList<FieldMeta>();
-			Stream.of(listFields).forEach((obj) -> {
-				if (fieldMap.get(obj.trim()) != null) {
-					listFieldMeta.add(fieldMap.get(obj.trim()));
-				} else {
-					System.out.println("$" + obj.trim() + "$   dialog field is null ");
-				}
-
-			});
-			metadata.setListFields(listFieldMeta);
+		DomainMeta metadata = new DomainMeta(metaConfig.getName());
+		if (!StringUtils.isBlank(metaConfig.getPluralName())) {
+			metadata.setPluralName(metaConfig.getPluralName());
 		}
 
-		if (!StringUtils.isBlank(metaConfig.getDialogFields())) {
-			String[] dialogFields = metaConfig.getDialogFields().split(";");
-			List<FieldMeta> dialogFieldMeta = new LinkedList<FieldMeta>();
-			Stream.of(dialogFields).forEach((obj) -> {
-				if (fieldMap.get(obj.trim()) != null) {
-					dialogFieldMeta.add(fieldMap.get(obj.trim()));
-				} else {
-					System.out.println("$" + obj.trim() + "$   dialog field is null ");
-				}
+		// Detail Page
 
-			});
-			metadata.setDialogFields(dialogFieldMeta);
-		}
+		DetailPageConfig detailPageConfig = metaConfig.getDetailPage();
+		PageMeta detailPageMeta = buildDetailPage(detailPageConfig, fieldMap, propertiesMap);
+		metadata.setDetailPage(detailPageMeta);
 
-		if (!StringUtils.isBlank(metaConfig.getDetailFields())) {
-			String[] detailFields = metaConfig.getDetailFields().split(";");
-			List<FieldMeta> detailFieldMeta = new LinkedList<FieldMeta>();
-			Stream.of(detailFields).forEach((obj) -> {
-				if (fieldMap.get(obj.trim()) != null) {
-					detailFieldMeta.add(fieldMap.get(obj.trim()));
-				} else {
-					System.out.println("$" + obj.trim() + "$   dialog field is null ");
-				}
+		// Dialog Page
+		DetailPageConfig dialogPageConfig = metaConfig.getDialogPage();
+		PageMeta dialogPageMeta = buildDetailPage(dialogPageConfig, fieldMap, propertiesMap);
+		metadata.setDialogPage(dialogPageMeta);
 
-			});
-			metadata.setDetailFields(detailFieldMeta);
-		}
-
-		metadata.setMetaFields(rootFieldMeta);
+		// Dialog Page
+		DetailPageConfig listPageConfig = metaConfig.getListPage();
+		PageMeta listPageMeta = buildDetailPage(listPageConfig, fieldMap, propertiesMap);
+		metadata.setListPage(listPageMeta);
 		return metadata;
 	}
 
-	private static List<FieldMeta> buildRootFieldMeta(Class clazz) {
-		List<FieldMeta> result = new LinkedList<FieldMeta>();
+	private static PageMeta buildDetailPage(DetailPageConfig config, Map<String, FieldInfo> fieldsMap,
+			Map<String, FieldMeta> propertiesMap) {
+		PageMeta page = new PageMeta();
+		page.setTemplate(config.getTemplate());
+		if (config.getSubItems() != null) {
+			Stream.of(config.getSubItems()).forEach((obj) -> {
+				Class<?> fieldClass = fieldsMap.get(obj.getName()).getActualType();
+				String fieldsContent = obj.getFields();
+				String[] fieldNames = fieldsContent.split(";");
+				SubItemMeta subItem = new SubItemMeta(obj.getName());
+				Stream.of(fieldNames).forEach((eachField) -> {
+					FieldMeta source = propertiesMap.get(fieldClass.getName() + "..." + eachField.trim());
+					subItem.getFields().add(source);
+				});
+				page.getSubItems().add(subItem);
+			});
+		}
+		if (!StringUtils.isBlank(config.getBasicInfo())) {
+			for (String each : config.getBasicInfo().split(";")) {
+				page.getBasicFields().add(propertiesMap.get(each));
+			}
+		}
+		return page;
+	}
+
+	private static Map<String, FieldInfo> buildFieldMap(final Class<?> clazz) {
+		Map<String, FieldInfo> fieldMap = new HashMap<String, FieldInfo>();
+		FieldUtils.getAllFieldsList(clazz).forEach((obj) -> {
+			FieldInfo info = new FieldInfo(obj.getName(), obj.getType());
+			if (obj.getGenericType() instanceof ParameterizedType) {
+				ParameterizedType parameter = (ParameterizedType) obj.getGenericType();
+				Class<?> cc = (Class<?>) parameter.getActualTypeArguments()[0];
+				info.setActualType(cc);
+			}
+			fieldMap.put(info.getName(), info);
+		});
+		return fieldMap;
+	}
+
+	private static Map<String, FieldMeta> buildRootFieldMeta(Class clazz) {
+		Map<String, FieldMeta> result = new HashMap<String, FieldMeta>();
 		Field[] fields = FieldUtils.getAllFields(clazz);
 		String domainName = StringUtils.uncapitalize(clazz.getSimpleName());
 		Stream.of(fields).forEach((field) -> {
 			Class type = field.getType();
 			String name = field.getName();
-			if (field.isAnnotationPresent(OneToMany.class)) {
-				System.out.println(name + "is OneToMany");
-			} else if (field.isAnnotationPresent(ManyToMany.class)) {
-				System.out.println(name + "is ManyToMany  " + field.getGenericType() + TypeUtils.isSimple(type));
-			} else if (field.isAnnotationPresent(ManyToOne.class)) {
-				System.out.println(name + "is ManyToOne");
-			} else if (field.isAnnotationPresent(OneToOne.class)) {
-				List<FieldMeta> meta = buildFieldMeta(type, name);
-				result.addAll(meta);
-				System.out.println(name + "is OneToOne" + TypeUtils.isSimple(type));
-			} else if (field.isAnnotationPresent(Embedded.class)) {
-				System.out.println(name + "is Embedded");
+			if (field.getGenericType() instanceof ParameterizedType) {
+				ParameterizedType parameter = (ParameterizedType) field.getGenericType();
+				Class<?> cc = (Class<?>) parameter.getActualTypeArguments()[0];
+				Map<String, FieldMeta> map = buildFieldMetaSub(cc);
+				result.putAll(map);
+			} else if (field.isAnnotationPresent(OneToOne.class) || field.isAnnotationPresent(ManyToOne.class)
+					|| field.isAnnotationPresent(Embedded.class)) {
+				Map<String, FieldMeta> meta = buildFieldMeta(type, name);
+				result.putAll(meta);
 			} else {
-				// System.out.println("simple " + TypeUtils.isSimple(type));
 				FieldMeta meta = new FieldMeta(name, type.getSimpleName().toLowerCase());
 				meta.setTranslationKey(domainName + "." + name);
-				result.add(meta);
+				result.put(name, meta);
 			}
 		});
-
 		return result;
 	}
 
-	private static List<FieldMeta> buildFieldMeta(Class clazz, String keyPrefix) {
+	private static Map<String, FieldMeta> buildFieldMetaSub(Class<?> clazz) {
+		Map<String, FieldMeta> map = new HashMap<String, FieldMeta>();
+		String domainName = StringUtils.uncapitalize(clazz.getSimpleName());
+		Field[] fields = FieldUtils.getAllFields(clazz);
+		Stream.of(fields).forEach((field) -> {
+			if (field.getGenericType() instanceof ParameterizedType) {
+
+			} else {
+				Class type = field.getType();
+				String name = field.getName();
+				FieldMeta meta = new FieldMeta(name, type.getSimpleName().toLowerCase());
+				meta.setTranslationKey(domainName + "." + name);
+				map.put(clazz.getName() + "..." + name, meta);
+			}
+		});
+		return map;
+	}
+
+	private static Map<String, FieldMeta> buildFieldMeta(Class clazz, String keyPrefix) {
 		String tmpKeyPrefix = StringUtils.isBlank(keyPrefix) ? "" : keyPrefix.trim() + ".";
 		String domainName = StringUtils.uncapitalize(clazz.getSimpleName());
-		List<FieldMeta> metas = new LinkedList<FieldMeta>();
+		Map<String, FieldMeta> metas = new HashMap<String, FieldMeta>();
 		Field[] fields = FieldUtils.getAllFields(clazz);
 		Stream.of(fields).forEach((obj) -> {
 			Class type = obj.getType();
 			String name = obj.getName();
 			FieldMeta meta = new FieldMeta(tmpKeyPrefix + name, type.getSimpleName().toLowerCase());
 			meta.setTranslationKey(domainName + "." + name);
-			metas.add(meta);
+			metas.put(tmpKeyPrefix + name, meta);
 		});
 		return metas;
 	}
 
-	private static DomainMetaConfig buildMetaConfig(Class clazz) {
+	private static DomainMetaConfig buildMetaConfig(final Class clazz) {
 		String domainName = StringUtils.uncapitalize(clazz.getSimpleName());
 		String path = META_PATH.replace("{name}", domainName);
 		DomainMetaConfig config = null;

@@ -24,9 +24,9 @@
 					class="needs-validation" th:id="__${domainMetadata.name}__-form"
 					novalidate>
 					<div class="row">
-						<th:block th:each="each, status: ${domainMetadata.dialogFields}">
+						<th:block th:each="each, status: ${domainMetadata.dialogPage.basicFields}">
 							<div class="col-md-6 mb-3">
-								<label for="${each.name}"
+								<label th:for="${each.name}"
 									th:text="#{__${each.translationKey}__}">Field Name</label>
 								<th:block th:switch="${each.type}">
 									<th:block th:case="string">
@@ -38,7 +38,7 @@
 											is required.
 										</div>
 									</th:block>
-									<th:block th:case="'long','integer','int','double'">
+									<th:block th:case="long">
 										<input type="text" class="form-control" id="${each.name}_id"
 											th:field="*{__${each.name}__}" placeholder="" value=""
 											required>
@@ -66,6 +66,7 @@
 										</div>
 									</th:block>
 									<th:block th:case="*">
+									<span>other case</span>
 										<input type="text" class="form-control" id="${each.name}_id"
 											th:field="*{__${each.name}__}" placeholder="" value=""
 											required>

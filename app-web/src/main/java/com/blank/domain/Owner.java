@@ -32,11 +32,10 @@ import javax.persistence.Transient;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 
-import com.blank.common.domain.frw.DomainMeta;
+import com.blank.common.model.StatusEnum;
 
 @Entity
 @Table(name = "owners")
-@DomainMeta(pluralName = "owners")
 public class Owner extends BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 447728202717826028L;
@@ -55,6 +54,8 @@ public class Owner extends BaseEntity implements Serializable {
 
 	@Column(name = "last_name")
 	protected String lastName;
+
+	private StatusEnum status;
 
 	@Transient
 	protected String displayName;
@@ -162,6 +163,14 @@ public class Owner extends BaseEntity implements Serializable {
 
 	public String getDisplayName() {
 		return this.firstName + " " + this.lastName;
+	}
+
+	public StatusEnum getStatus() {
+		return status;
+	}
+
+	public void setStatus(StatusEnum status) {
+		this.status = status;
 	}
 
 	@Override

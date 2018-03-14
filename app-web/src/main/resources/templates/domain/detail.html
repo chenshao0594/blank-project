@@ -20,7 +20,7 @@
 					<legend class="section" th:text="#{common.basicInfo}">Basic Info</legend>
 					<hr class="mb-4">
 					<dl class="row justify-content-md-left">
-						<th:block th:each="field : ${domainMetadata.dialogFields}">
+						<th:block th:each="field : ${domainMetadata.detailPage.basicFields}">
 							<dt class="col-md-2 text-right"
 								th:text="#{__${field.translationKey}__}">Field Name</dt>
 							<dd class="col-md-4 text-left"

@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.blank.common.domain.frw.DomainMeta;
 import com.blank.common.domain.frw.DomainMetaBuilder;
-import com.blank.common.domain.frw.DomainMetadata;
 import com.blank.common.service.AbstractService;
 
 public abstract class AbstractController<E, K> {
@@ -28,7 +28,7 @@ public abstract class AbstractController<E, K> {
 	private final AbstractService<E, K> service;
 
 	private final Class entityClass;
-	private DomainMetadata metadata;
+	private DomainMeta metadata;
 
 	public AbstractController(AbstractService<E, K> service, Class entityClass) {
 		this.service = service;

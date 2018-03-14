@@ -10,5 +10,6 @@ public class DomainMetaTest {
 	@Test
 	public void test() {
 		System.out.println(DomainMetaBuilder.build(User.class));
+
 	}
 }

@@ -1,12 +1,22 @@
 <domain-meta>
 	<name>user</name>
 	<pluralName>users</pluralName>
-	<listPage>user/list</listPage>
-	<detailPage></detailPage>
-	<dialogPage></dialogPage>
-	<listFields>id;name;email;userProfile.city</listFields>
-	<detailFields>id;name;email;authorities;userProfile.city</detailFields>
-	<dialogFields>name;email;userProfile.city</dialogFields>
+	<listPage>
+		<template>/domain/list</template>
+		<basic-info>id;name;email;userProfile.city</basic-info>
+	</listPage>
+	<detailPage>
+		<template>/domain/detail</template>
+		<basic-info>id;name;email;userProfile.city</basic-info>
+		<sub-item order="1">
+			<name>authorities</name>
+			<fields>id;createdBy</fields>
+		</sub-item>
+	</detailPage>
+	<dialogPage>
+		<template>/domain/dialog</template>
+		<basic-info>name;email;userProfile.city</basic-info>
+	</dialogPage>
 	<searchFields>name;email</searchFields>
 	<permissions>
 		<permission>

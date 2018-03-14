@@ -1,6 +1,8 @@
 package com.blank.common.domain.frw;
 
-public class FieldMeta {
+import java.io.Serializable;
+
+public class FieldMeta implements Serializable {
 	private String name;
 	private String type;
 	private String translationKey;

@@ -1,30 +1,39 @@
-package com.blank.common.domain.frw;
+package com.blank.common.domain.config;
 
-import java.util.Arrays;
-
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "domain-meta")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class DomainMetaConfig {
-
+	@XmlElement
 	private String name;
+	@XmlElement
 	private String pluralName;
+	@XmlElement
 	private String listFields;
-	private String detailFields;
+	@XmlElement
 	private String dialogFields;
+	@XmlElement
 	private String searchFields;
-	private Permission[] permissions;
 
-	private String listPage;
-	private String dialogPage;
-	private String detailPage;
+	@XmlElement(name = "permissions")
+	private Permission[] permissions;
+	@XmlElement
+	private DetailPageConfig detailPage;
+
+	@XmlElement
+	private DetailPageConfig dialogPage;
+
+	@XmlElement
+	private DetailPageConfig listPage;
 
 	public String getName() {
 		return name;
 	}
 
-	@XmlElement
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -33,7 +42,6 @@ public class DomainMetaConfig {
 		return pluralName;
 	}
 
-	@XmlElement
 	public void setPluralName(String pluralName) {
 		this.pluralName = pluralName;
 	}
@@ -42,7 +50,6 @@ public class DomainMetaConfig {
 		return listFields;
 	}
 
-	@XmlElement
 	public void setListFields(String listFields) {
 		this.listFields = listFields;
 	}
@@ -51,7 +58,6 @@ public class DomainMetaConfig {
 		return searchFields;
 	}
 
-	@XmlElement
 	public void setSearchFields(String searchFields) {
 		this.searchFields = searchFields;
 	}
@@ -60,53 +66,39 @@ public class DomainMetaConfig {
 		return permissions;
 	}
 
-	@XmlElement
 	public void setPermissions(Permission[] permissions) {
 		this.permissions = permissions;
-	}
-
-	public String getDetailFields() {
-		return detailFields;
-	}
-
-	@XmlElement
-	public void setDetailFields(String detailFields) {
-		this.detailFields = detailFields;
 	}
 
 	public String getDialogFields() {
 		return dialogFields;
 	}
 
-	@XmlElement
 	public void setDialogFields(String dialogFields) {
 		this.dialogFields = dialogFields;
 	}
 
-	public String getListPage() {
-		return listPage;
-	}
-
-	@XmlElement
-	public void setListPage(String listPage) {
-		this.listPage = listPage;
-	}
-
-	public String getDialogPage() {
+	public DetailPageConfig getDialogPage() {
 		return dialogPage;
 	}
 
-	@XmlElement
-	public void setDialogPage(String dialogPage) {
+	public void setDialogPage(DetailPageConfig dialogPage) {
 		this.dialogPage = dialogPage;
 	}
 
-	public String getDetailPage() {
+	public DetailPageConfig getListPage() {
+		return listPage;
+	}
+
+	public void setListPage(DetailPageConfig listPage) {
+		this.listPage = listPage;
+	}
+
+	public DetailPageConfig getDetailPage() {
 		return detailPage;
 	}
 
-	@XmlElement
-	public void setDetailPage(String detailPage) {
+	public void setDetailPage(DetailPageConfig detailPage) {
 		this.detailPage = detailPage;
 	}
 
@@ -138,12 +130,6 @@ public class DomainMetaConfig {
 			return "Permission [role=" + role + ", operation=" + operation + "]";
 		}
 
-	}
-
-	@Override
-	public String toString() {
-		return "DomainMetaConfig [name=" + name + ", pluralName=" + pluralName + ", listFields=" + listFields
-				+ ", searchFields=" + searchFields + ", permissions=" + Arrays.toString(permissions) + "]";
 	}
 
 }

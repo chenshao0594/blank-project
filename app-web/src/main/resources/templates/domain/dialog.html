@@ -24,7 +24,8 @@
 					class="needs-validation" th:id="__${domainMetadata.name}__-form"
 					novalidate>
 					<div class="row">
-						<th:block th:each="each, status: ${domainMetadata.dialogPage.basicFields}">
+						<th:block
+							th:each="each, status: ${domainMetadata.dialogPage.basicFields}">
 							<div class="col-md-6 mb-3">
 								<label th:for="${each.name}"
 									th:text="#{__${each.translationKey}__}">Field Name</label>
@@ -38,7 +39,7 @@
 											is required.
 										</div>
 									</th:block>
-									<th:block th:case="long">
+									<th:block th:case="'long' or 'int'">
 										<input type="text" class="form-control" id="${each.name}_id"
 											th:field="*{__${each.name}__}" placeholder="" value=""
 											required>
@@ -65,8 +66,20 @@
 											is required.
 										</div>
 									</th:block>
+									<th:block th:case="choice">
+										<select class="custom-select d-block w-100"
+											th:field="*{__${each.name}__}">
+											<option th:text="#{common.select}" value="null"></option>
+											<option th:each="choice : ${each.values}"
+												th:value="${choice.key}" th:text="${choice.value}" />
+										</select>
+										<div class="invalid-feedback">
+											Valid <span th:text="#{__${each.translationKey}__}"></span>
+											is required.
+										</div>
+									</th:block>
 									<th:block th:case="*">
-									<span>other case</span>
+										<span>other case</span>
 										<input type="text" class="form-control" id="${each.name}_id"
 											th:field="*{__${each.name}__}" placeholder="" value=""
 											required>
@@ -93,6 +106,27 @@
 				</form>
 			</div>
 		</div>
+		<div id="success"></div>
 	</section>
+
+	<th:block layout:fragment="page-script">
+		<script type="text/javascript">
+			$(function() {
+				$.ajax({
+					url : "/rest",
+					success : function(result) {
+						$.each(result, function(k, v) {
+							$("#success").text(k + "===" + v);
+							console.log(k + "===" + v)
+						});
+
+					},
+					error : function(result) {
+						$("#success").text("error ..");
+					}
+				});
+			});
+		</script>
+	</th:block>
 </body>
 </html>

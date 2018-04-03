@@ -5,6 +5,8 @@ import java.io.Serializable;
 public class FieldMeta implements Serializable {
 	private String name;
 	private String type;
+	private Class<?> clazz;
+	private Object defaultValue;
 	private String translationKey;
 	private long colLength = 6;
 	private boolean required = false;
@@ -54,10 +56,26 @@ public class FieldMeta implements Serializable {
 		this.required = required;
 	}
 
+	public Object getDefaultValue() {
+		return defaultValue;
+	}
+
+	public void setDefaultValue(Object defaultValue) {
+		this.defaultValue = defaultValue;
+	}
+
+	public Class<?> getClazz() {
+		return clazz;
+	}
+
+	public void setClazz(Class<?> clazz) {
+		this.clazz = clazz;
+	}
+
 	@Override
 	public String toString() {
-		return "FieldMeta [name=" + name + ", type=" + type + ", translationKey=" + translationKey + ", colLength="
-				+ colLength + ", required=" + required + "]";
+		return "FieldMeta [name=" + name + ", type=" + type + ", defaultValue=" + defaultValue + ", translationKey="
+				+ translationKey + ", colLength=" + colLength + ", required=" + required + "]";
 	}
 
 }

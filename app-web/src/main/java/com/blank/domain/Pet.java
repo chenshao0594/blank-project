@@ -27,6 +27,8 @@ import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.blank.common.domain.DisplayName;
+
 /**
  * Simple business object representing a pet.
  *
@@ -42,6 +44,7 @@ public class Pet extends BaseEntity {
 	private static final long serialVersionUID = -7523031237057644849L;
 
 	@Column(name = "name")
+	@DisplayName
 	protected String name;
 
 	@Column(name = "birth_date")

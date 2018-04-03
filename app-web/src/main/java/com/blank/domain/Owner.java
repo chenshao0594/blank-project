@@ -32,6 +32,7 @@ import javax.persistence.Transient;
 import org.springframework.beans.support.MutableSortDefinition;
 import org.springframework.beans.support.PropertyComparator;
 
+import com.blank.common.domain.DisplayName;
 import com.blank.common.model.StatusEnum;
 
 @Entity
@@ -58,6 +59,7 @@ public class Owner extends BaseEntity implements Serializable {
 	private StatusEnum status;
 
 	@Transient
+	@DisplayName
 	protected String displayName;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")

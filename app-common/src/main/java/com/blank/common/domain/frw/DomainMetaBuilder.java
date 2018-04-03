@@ -5,10 +5,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Stream;
 
 import javax.persistence.Embedded;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -24,13 +27,12 @@ import com.blank.common.model.FieldInfo;
 
 public class DomainMetaBuilder {
 	private final static String META_PATH = "domain-meta/{name}_meta.xml";
+	private static Map<Class<?>, DomainMeta> map = new ConcurrentHashMap<Class<?>, DomainMeta>();
 
 	public static DomainMeta build(final Class<?> clazz) {
-
 		// build field Map
 		Map<String, FieldInfo> fieldMap = buildFieldMap(clazz);
 		Map<String, FieldMeta> propertiesMap = buildRootFieldMeta(clazz);
-
 		DomainMetaConfig metaConfig = buildMetaConfig(clazz);
 		DomainMeta metadata = new DomainMeta(metaConfig.getName());
 		if (!StringUtils.isBlank(metaConfig.getPluralName())) {
@@ -99,19 +101,38 @@ public class DomainMetaBuilder {
 		Field[] fields = FieldUtils.getAllFields(clazz);
 		String domainName = StringUtils.uncapitalize(clazz.getSimpleName());
 		Stream.of(fields).forEach((field) -> {
-			Class type = field.getType();
+			Class<?> type = field.getType();
 			String name = field.getName();
-			if (field.getGenericType() instanceof ParameterizedType) {
-				ParameterizedType parameter = (ParameterizedType) field.getGenericType();
-				Class<?> cc = (Class<?>) parameter.getActualTypeArguments()[0];
-				Map<String, FieldMeta> map = buildFieldMetaSub(cc);
-				result.putAll(map);
-			} else if (field.isAnnotationPresent(OneToOne.class) || field.isAnnotationPresent(ManyToOne.class)
-					|| field.isAnnotationPresent(Embedded.class)) {
-				Map<String, FieldMeta> meta = buildFieldMeta(type, name);
-				result.putAll(meta);
+			if (field.isAnnotationPresent(ManyToOne.class)) {
+				ManyToOneField meta = new ManyToOneField(name, "ManyToOne");
+				result.put(name, meta);
+			} else if (field.isAnnotationPresent(ManyToMany.class)) {
+				ManyToManyField meta = new ManyToManyField(name, "ManyToMany");
+				result.put(name, meta);
+			} else if (field.isAnnotationPresent(OneToMany.class)) {
+				OneToMany oneToMany = field.getAnnotation(OneToMany.class);
+				System.out.println(oneToMany.targetEntity());
+				OneToManyField meta = new OneToManyField(name, "OneToMany");
+				result.put(name, meta);
+			} else if (field.isAnnotationPresent(OneToOne.class)) {
+				OneToOneField meta = new OneToOneField(name, "OneToOne");
+				meta.setClazz(field.getType());
+				result.put(name, meta);
+			} else if (field.isAnnotationPresent(Embedded.class)) {
+				ManyToOneField meta = new ManyToOneField(name, "Embedded");
+				meta.setClazz(field.getType());
+				result.put(name, meta);
+			} else if (type.isEnum()) {
+				ChoiceField meta = new ChoiceField(name, convertFieldType(type));
+				meta.setClazz(field.getType());
+				meta.setTranslationKey(domainName + "." + name);
+				for (Object t : type.getEnumConstants()) {
+					Choice choice = new Choice(t.toString(), t.toString());
+					meta.getValues().add(choice);
+				}
+				result.put(name, meta);
 			} else {
-				FieldMeta meta = new FieldMeta(name, type.getSimpleName().toLowerCase());
+				FieldMeta meta = new FieldMeta(name, convertFieldType(type));
 				meta.setTranslationKey(domainName + "." + name);
 				result.put(name, meta);
 			}
@@ -129,7 +150,7 @@ public class DomainMetaBuilder {
 			} else {
 				Class type = field.getType();
 				String name = field.getName();
-				FieldMeta meta = new FieldMeta(name, type.getSimpleName().toLowerCase());
+				FieldMeta meta = new FieldMeta(name, convertFieldType(type));
 				meta.setTranslationKey(domainName + "." + name);
 				map.put(clazz.getName() + "..." + name, meta);
 			}
@@ -143,13 +164,26 @@ public class DomainMetaBuilder {
 		Map<String, FieldMeta> metas = new HashMap<String, FieldMeta>();
 		Field[] fields = FieldUtils.getAllFields(clazz);
 		Stream.of(fields).forEach((obj) -> {
-			Class type = obj.getType();
+			Class<?> type = obj.getType();
 			String name = obj.getName();
-			FieldMeta meta = new FieldMeta(tmpKeyPrefix + name, type.getSimpleName().toLowerCase());
+			FieldMeta meta = new FieldMeta(tmpKeyPrefix + name, convertFieldType(type));
 			meta.setTranslationKey(domainName + "." + name);
 			metas.put(tmpKeyPrefix + name, meta);
 		});
 		return metas;
+	}
+
+	private static String convertFieldType(Class<?> clazz) {
+		String type = "*";
+		if (clazz.isPrimitive()) {
+			type = clazz.getSimpleName().toLowerCase();
+		} else if (clazz.isEnum()) {
+			type = "enum";
+		} else {
+			type = clazz.getSimpleName().toLowerCase();
+		}
+		return type;
+
 	}
 
 	private static DomainMetaConfig buildMetaConfig(final Class clazz) {

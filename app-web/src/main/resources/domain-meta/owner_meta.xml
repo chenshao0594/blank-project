@@ -1,12 +1,18 @@
 <domain-meta>
 	<name>owner</name>
 	<pluralName>owners</pluralName>
-	<listPage></listPage>
-	<detailPage></detailPage>
-	<dialogPage></dialogPage>
-	<listFields>id;displayName;telephone;city;address</listFields>
-	<detailFields>id;displayName;telephone;city;address;status</detailFields>
-	<dialogFields>firstName;lastName;telephone;city;address</dialogFields>
+	<listPage>
+		<template>/domain/list</template>
+		<basic-info>id;displayName;telephone;city;address</basic-info>
+	</listPage>
+	<detailPage>
+		<template>/domain/detail</template>
+		<basic-info>id;displayName;telephone;city;address;status</basic-info>
+	</detailPage>
+	<dialogPage>
+		<template>/domain/dialog</template>
+		<basic-info>firstName;lastName;telephone;city;address;status</basic-info>
+	</dialogPage>
 	<searchFields>firstName;lastName;telephone;city;address</searchFields>
 	<permissions>
 		<permission>

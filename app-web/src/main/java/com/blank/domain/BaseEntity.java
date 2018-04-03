@@ -35,7 +35,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @Audited
 @MappedSuperclass
 @EntityListeners(AuditingEntityListener.class)
-public class BaseEntity implements Serializable {
+public class BaseEntity implements Serializable, BusinessObject {
 
 	private static final long serialVersionUID = 4209846601587744947L;
 

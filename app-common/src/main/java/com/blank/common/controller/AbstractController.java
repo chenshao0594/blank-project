@@ -27,7 +27,7 @@ public abstract class AbstractController<E, K> {
 
 	private final AbstractService<E, K> service;
 
-	private final Class entityClass;
+	private final Class<?> entityClass;
 	private DomainMeta metadata;
 
 	public AbstractController(AbstractService<E, K> service, Class entityClass) {

@@ -11,9 +11,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableAutoConfiguration
 @EnableConfigurationProperties
-public class SampleApplication {
+public class PortalApplication {
 	public static void main(String[] args) throws Exception {
-		SpringApplication springApplication = new SpringApplication(SampleApplication.class);
+		SpringApplication springApplication = new SpringApplication(PortalApplication.class);
 		springApplication.addListeners();
 		springApplication.run(args);
 	}

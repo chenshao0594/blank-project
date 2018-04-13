@@ -3,11 +3,11 @@
 	<pluralName>users</pluralName>
 	<listPage>
 		<template>/domain/list</template>
-		<basic-info>id;name;email;userProfile.city</basic-info>
+		<basic-info>id;name;email</basic-info>
 	</listPage>
 	<detailPage>
 		<template>/domain/detail</template>
-		<basic-info>id;name;email;userProfile.city</basic-info>
+		<basic-info>id;name;email</basic-info>
 		<sub-item order="1">
 			<name>authorities</name>
 			<fields>id;createdBy</fields>

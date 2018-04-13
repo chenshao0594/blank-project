@@ -254,6 +254,6 @@
 	</dependencyManagement>
 	<modules>
 		<module>app-common</module>
-		<module>app-web</module>
+		<module>app-portal</module>
 	</modules>
 </project>

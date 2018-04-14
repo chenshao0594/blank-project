@@ -1,4 +1,4 @@
-package com.snow.test;
+package com.blank.common.domain.frw.field;
 
 public class SimpleFile extends AbstractField {
 

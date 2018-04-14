@@ -27,12 +27,12 @@
 						<th:block
 							th:each="each, status: ${domainMetadata.dialogPage.basicFields}">
 							<div class="col-md-6 mb-3">
-								<label th:for="${each.name}"
+								<label th:for="${each.path}"
 									th:text="#{__${each.translationKey}__}">Field Name</label>
 								<th:block th:switch="${each.type}">
 									<th:block th:case="string">
-										<input type="text" class="form-control" id="${each.name}_id"
-											th:field="*{__${each.name}__}" placeholder="" value=""
+										<input type="text" class="form-control" id="${each.path}_id"
+											th:field="*{__${each.path}__}" placeholder="" value=""
 											required>
 										<div class="invalid-feedback">
 											Valid <span th:text="#{__${each.translationKey}__}"></span>
@@ -40,8 +40,8 @@
 										</div>
 									</th:block>
 									<th:block th:case="'long' or 'int'">
-										<input type="text" class="form-control" id="${each.name}_id"
-											th:field="*{__${each.name}__}" placeholder="" value=""
+										<input type="text" class="form-control" id="${each.path}_id"
+											th:field="*{__${each.path}__}" placeholder="" value=""
 											required>
 										<div class="invalid-feedback">
 											Valid <span th:text="#{__${each.translationKey}__}"></span>
@@ -49,8 +49,8 @@
 										</div>
 									</th:block>
 									<th:block th:case="amountfield">
-										<input type="text" class="form-control" id="${each.name}_id"
-											th:field="*{__${each.name}__}" placeholder="" value=""
+										<input type="text" class="form-control" id="${each.path}_id"
+											th:field="*{__${each.path}__}" placeholder="" value=""
 											required>
 										<div class="invalid-feedback">
 											Valid <span th:text="#{__${each.translationKey}__}"></span>
@@ -58,8 +58,8 @@
 										</div>
 									</th:block>
 									<th:block th:case="addressfield">
-										<input type="text" class="form-control" id="${each.name}_id"
-											th:field="*{__${each.name}__}" placeholder="" value=""
+										<input type="text" class="form-control" id="${each.path}_id"
+											th:field="*{__${each.path}__}" placeholder="" value=""
 											required>
 										<div class="invalid-feedback">
 											Valid <span th:text="#{__${each.translationKey}__}"></span>
@@ -68,7 +68,7 @@
 									</th:block>
 									<th:block th:case="choice">
 										<select class="custom-select d-block w-100"
-											th:field="*{__${each.name}__}">
+											th:field="*{__${each.path}__}">
 											<option th:text="#{common.select}" value="null"></option>
 											<option th:each="choice : ${each.values}"
 												th:value="${choice.key}" th:text="${choice.value}" />
@@ -80,8 +80,8 @@
 									</th:block>
 									<th:block th:case="*">
 										<span>other case</span>
-										<input type="text" class="form-control" id="${each.name}_id"
-											th:field="*{__${each.name}__}" placeholder="" value=""
+										<input type="text" class="form-control" id="${each.path}_id"
+											th:field="*{__${each.path}__}" placeholder="" value=""
 											required>
 										<div class="invalid-feedback">
 											Valid <span th:text="#{__${each.translationKey}__}"></span>

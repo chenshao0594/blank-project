@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.blank.common.domain.frw.FieldMeta;
+import com.blank.common.domain.frw.page.PageFieldMeta;
 
 @XmlRootElement(name = "sub-item")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -17,7 +17,7 @@ public class SubItem {
 	private String name;
 	@XmlElement(name = "fields")
 	private String fields;
-	private List<FieldMeta> fieldMetas = new LinkedList<FieldMeta>();
+	private List<PageFieldMeta> fieldMetas = new LinkedList<PageFieldMeta>();
 
 	public String getName() {
 		return name;
@@ -35,11 +35,11 @@ public class SubItem {
 		this.fields = fields;
 	}
 
-	public List<FieldMeta> getFieldMetas() {
+	public List<PageFieldMeta> getFieldMetas() {
 		return fieldMetas;
 	}
 
-	public void setFieldMetas(List<FieldMeta> fieldMetas) {
+	public void setFieldMetas(List<PageFieldMeta> fieldMetas) {
 		this.fieldMetas = fieldMetas;
 	}
 

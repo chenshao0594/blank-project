@@ -3,7 +3,7 @@
 	<pluralName>users</pluralName>
 	<listPage>
 		<template>/domain/list</template>
-		<basic-info>id;name;email</basic-info>
+		<basic-info>id;name;email;userProfile.id</basic-info>
 	</listPage>
 	<detailPage>
 		<template>/domain/detail</template>
@@ -15,7 +15,7 @@
 	</detailPage>
 	<dialogPage>
 		<template>/domain/dialog</template>
-		<basic-info>name;email;userProfile.city</basic-info>
+		<basic-info>name;email</basic-info>
 	</dialogPage>
 	<searchFields>name;email</searchFields>
 	<permissions>

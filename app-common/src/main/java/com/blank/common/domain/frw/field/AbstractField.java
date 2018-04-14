@@ -1,14 +1,16 @@
-package com.snow.test;
+package com.blank.common.domain.frw.field;
 
 public abstract class AbstractField {
 	private final String name;
 	private final Class<?> type;
 	private String translationKey;
 	private Object defaultValue;
+	private boolean isComplex;
 
 	public AbstractField(String name, Class<?> type) {
 		this.name = name;
 		this.type = type;
+		this.isComplex = false;
 	}
 
 	public String getName() {
@@ -25,6 +27,14 @@ public abstract class AbstractField {
 
 	public void setTranslationKey(String translationKey) {
 		this.translationKey = translationKey;
+	}
+
+	public boolean getIsComplex() {
+		return isComplex;
+	}
+
+	public void setIsComplex(boolean isComplex) {
+		this.isComplex = isComplex;
 	}
 
 	@Override

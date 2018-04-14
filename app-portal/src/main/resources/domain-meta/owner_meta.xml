@@ -8,6 +8,10 @@
 	<detailPage>
 		<template>/domain/detail</template>
 		<basic-info>id;displayName;telephone;city;address;status</basic-info>
+		<sub-item order="1">
+			<name>pets</name>
+			<fields>name;type</fields>
+		</sub-item>
 	</detailPage>
 	<dialogPage>
 		<template>/domain/dialog</template>

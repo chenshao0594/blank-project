@@ -54,7 +54,7 @@
 				<thead class="thead-default">
 					<tr>
 						<th:block th:each="field : ${domainMetadata.listPage.basicFields}">
-							<th><a class="sorted" sd:pagination-sort="${field.name}"
+							<th><a class="sorted" sd:pagination-sort="${field.path}"
 								th:text="#{__${field.translationKey}__}">Id</a></th>
 						</th:block>
 						<th>Operation</th>
@@ -63,7 +63,7 @@
 				<tbody>
 					<tr th:each="row : ${page}">
 						<th:block th:each="field : ${domainMetadata.listPage.basicFields}">
-							<td th:text="${row.__${field.name}__}">first name</td>
+							<td th:text="${row.__${field.path}__}">field value</td>
 						</th:block>
 						<td>
 							<div class="flex-btn-group-container">

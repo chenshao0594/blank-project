@@ -1,20 +1,21 @@
-package com.blank.common.domain.frw;
+package com.blank.common.domain.frw.page;
 
 import java.io.Serializable;
 
-public class FieldMeta implements Serializable {
+public class PageFieldMeta implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5135890642322428908L;
 	private String name;
 	private String type;
+	private String path;
 	private Class<?> clazz;
 	private Object defaultValue;
 	private String translationKey;
 	private long colLength = 6;
 	private boolean required = false;
-
-	public FieldMeta(String name, String type) {
-		this.name = name;
-		this.type = type;
-	}
 
 	public String getName() {
 		return name;
@@ -72,10 +73,19 @@ public class FieldMeta implements Serializable {
 		this.clazz = clazz;
 	}
 
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
+	}
+
 	@Override
 	public String toString() {
-		return "FieldMeta [name=" + name + ", type=" + type + ", defaultValue=" + defaultValue + ", translationKey="
-				+ translationKey + ", colLength=" + colLength + ", required=" + required + "]";
+		return "PageFieldMeta [name=" + name + ", type=" + type + ", path=" + path + ", clazz=" + clazz
+				+ ", defaultValue=" + defaultValue + ", translationKey=" + translationKey + ", colLength=" + colLength
+				+ ", required=" + required + "]";
 	}
 
 }

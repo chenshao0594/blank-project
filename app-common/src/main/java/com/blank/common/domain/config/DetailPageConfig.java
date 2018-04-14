@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.blank.common.domain.frw.FieldMeta;
+import com.blank.common.domain.frw.page.PageFieldMeta;
 
 @XmlRootElement()
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -20,7 +20,7 @@ public class DetailPageConfig {
 	private String basicInfo;
 	@XmlElement(name = "sub-item")
 	private SubItem[] subItems;
-	private List<FieldMeta> basicFields = new LinkedList<FieldMeta>();
+	private List<PageFieldMeta> basicFields = new LinkedList<PageFieldMeta>();
 
 	public String getBasicInfo() {
 		return basicInfo;
@@ -46,11 +46,11 @@ public class DetailPageConfig {
 		this.template = template;
 	}
 
-	public List<FieldMeta> getBasicFields() {
+	public List<PageFieldMeta> getBasicFields() {
 		return basicFields;
 	}
 
-	public void setBasicFields(List<FieldMeta> basicFields) {
+	public void setBasicFields(List<PageFieldMeta> basicFields) {
 		this.basicFields = basicFields;
 	}
 

@@ -1,12 +1,12 @@
 package com.blank.common.domain.frw.page;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
+import java.util.List;
 
 public class PageMeta {
 	private String template;
-	private Set<PageFieldMeta> basicFields = new HashSet<PageFieldMeta>();
-	private Set<SubPageMeta> subItems = new HashSet<SubPageMeta>();
+	private List<PageFieldMeta> basicFields = new LinkedList<PageFieldMeta>();
+	private List<SubPageMeta> subItems = new LinkedList<SubPageMeta>();
 
 	public String getTemplate() {
 		return template;
@@ -16,19 +16,19 @@ public class PageMeta {
 		this.template = template;
 	}
 
-	public Set<PageFieldMeta> getBasicFields() {
+	public List<PageFieldMeta> getBasicFields() {
 		return basicFields;
 	}
 
-	public void setBasicFields(Set<PageFieldMeta> basicFields) {
+	public void setBasicFields(List<PageFieldMeta> basicFields) {
 		this.basicFields = basicFields;
 	}
 
-	public Set<SubPageMeta> getSubItems() {
+	public List<SubPageMeta> getSubItems() {
 		return subItems;
 	}
 
-	public void setSubItems(Set<SubPageMeta> subItems) {
+	public void setSubItems(List<SubPageMeta> subItems) {
 		this.subItems = subItems;
 	}
 

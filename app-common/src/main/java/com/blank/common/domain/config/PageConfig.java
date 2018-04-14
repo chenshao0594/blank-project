@@ -13,7 +13,7 @@ import com.blank.common.domain.frw.page.PageFieldMeta;
 
 @XmlRootElement()
 @XmlAccessorType(XmlAccessType.FIELD)
-public class DetailPageConfig {
+public class PageConfig {
 	@XmlElement(name = "template")
 	private String template;
 	@XmlElement(name = "basic-info")

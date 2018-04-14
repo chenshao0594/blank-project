@@ -22,13 +22,13 @@ public class DomainMetaConfig {
 	@XmlElement(name = "permissions")
 	private Permission[] permissions;
 	@XmlElement
-	private DetailPageConfig detailPage;
+	private PageConfig detailPage;
 
 	@XmlElement
-	private DetailPageConfig dialogPage;
+	private PageConfig dialogPage;
 
 	@XmlElement
-	private DetailPageConfig listPage;
+	private PageConfig listPage;
 
 	public String getName() {
 		return name;
@@ -78,27 +78,27 @@ public class DomainMetaConfig {
 		this.dialogFields = dialogFields;
 	}
 
-	public DetailPageConfig getDialogPage() {
+	public PageConfig getDialogPage() {
 		return dialogPage;
 	}
 
-	public void setDialogPage(DetailPageConfig dialogPage) {
+	public void setDialogPage(PageConfig dialogPage) {
 		this.dialogPage = dialogPage;
 	}
 
-	public DetailPageConfig getListPage() {
+	public PageConfig getListPage() {
 		return listPage;
 	}
 
-	public void setListPage(DetailPageConfig listPage) {
+	public void setListPage(PageConfig listPage) {
 		this.listPage = listPage;
 	}
 
-	public DetailPageConfig getDetailPage() {
+	public PageConfig getDetailPage() {
 		return detailPage;
 	}
 
-	public void setDetailPage(DetailPageConfig detailPage) {
+	public void setDetailPage(PageConfig detailPage) {
 		this.detailPage = detailPage;
 	}
 

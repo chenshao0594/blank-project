@@ -3,7 +3,7 @@
 	<pluralName>owners</pluralName>
 	<listPage>
 		<template>/domain/list</template>
-		<basic-info>id;displayName;telephone;city;address</basic-info>
+		<basic-info>id;displayName;telephone;address;city;</basic-info>
 	</listPage>
 	<detailPage>
 		<template>/domain/detail</template>

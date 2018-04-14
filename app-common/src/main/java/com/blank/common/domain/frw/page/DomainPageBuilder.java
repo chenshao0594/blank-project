@@ -10,7 +10,7 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 
-import com.blank.common.domain.config.DetailPageConfig;
+import com.blank.common.domain.config.PageConfig;
 import com.blank.common.domain.config.DomainMetaConfig;
 import com.blank.common.domain.frw.DomainMeta;
 import com.blank.common.domain.frw.DomainMetaBuilder;
@@ -32,22 +32,22 @@ public class DomainPageBuilder {
 			domainMeta.setPlural(metaConfig.getPluralName());
 		}
 		// Detail Page
-		DetailPageConfig detailPageConfig = metaConfig.getDetailPage();
-		PageMeta detailPageMeta = buildDetailPage(detailPageConfig, domainMeta);
+		PageConfig detailPageConfig = metaConfig.getDetailPage();
+		PageMeta detailPageMeta = buildPage(detailPageConfig, domainMeta);
 		pageMeta.setDetailPage(detailPageMeta);
 
 		// Dialog Page
-		DetailPageConfig dialogPageConfig = metaConfig.getDialogPage();
-		PageMeta dialogPageMeta = buildDetailPage(dialogPageConfig, domainMeta);
+		PageConfig dialogPageConfig = metaConfig.getDialogPage();
+		PageMeta dialogPageMeta = buildPage(dialogPageConfig, domainMeta);
 		pageMeta.setDialogPage(dialogPageMeta);
 		// List Page
-		DetailPageConfig listPageConfig = metaConfig.getListPage();
-		PageMeta listPageMeta = buildDetailPage(listPageConfig, domainMeta);
+		PageConfig listPageConfig = metaConfig.getListPage();
+		PageMeta listPageMeta = buildPage(listPageConfig, domainMeta);
 		pageMeta.setListPage(listPageMeta);
 		return pageMeta;
 	}
 
-	private static PageMeta buildDetailPage(DetailPageConfig config, final DomainMeta domainMeta) {
+	private static PageMeta buildPage(PageConfig config, final DomainMeta domainMeta) {
 		PageMeta page = new PageMeta();
 		page.setTemplate(config.getTemplate());
 		if (config.getSubItems() != null) {

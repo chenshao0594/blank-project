@@ -10,8 +10,8 @@ import javax.xml.bind.Unmarshaller;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.tomcat.util.http.fileupload.IOUtils;
 
-import com.blank.common.domain.config.PageConfig;
 import com.blank.common.domain.config.DomainMetaConfig;
+import com.blank.common.domain.config.PageConfig;
 import com.blank.common.domain.frw.DomainMeta;
 import com.blank.common.domain.frw.DomainMetaBuilder;
 import com.blank.common.domain.frw.field.AbstractField;
@@ -55,12 +55,14 @@ public class DomainPageBuilder {
 				String fieldsContent = obj.getFields();
 				String[] fieldNames = fieldsContent.split(";");
 				SubPageMeta subItem = new SubPageMeta(obj.getName());
-				AbstractField subItemFiled = domainMeta.getFields().get(obj.getName());
-				ComplexField complexField = (ComplexField) subItemFiled;
+				AbstractField subItemField = domainMeta.getFields().get(obj.getName());
+				if (subItemField == null) {
+					return;
+				}
+				ComplexField complexField = (ComplexField) subItemField;
 				DomainMeta tempMeta = complexField.getDomainMeta();
 				Stream.of(fieldNames).forEach((eachField) -> {
-					PageFieldMeta pageField = new PageFieldMeta();
-					pageField.setPath(eachField);
+					PageFieldMeta pageField = new PageFieldMeta(eachField);
 					AbstractField field = tempMeta.getFields().get(eachField);
 					pageField.setTranslationKey(field.getTranslationKey());
 					subItem.getFields().add(pageField);
@@ -73,8 +75,7 @@ public class DomainPageBuilder {
 				if (StringUtils.isBlank(each)) {
 					continue;
 				}
-				PageFieldMeta pageField = new PageFieldMeta();
-				pageField.setPath(each);
+				PageFieldMeta pageField = new PageFieldMeta(each);
 				AbstractField fieldMeta = null;
 				if (each.contains(".")) {
 					String[] keys = each.split("\\.");

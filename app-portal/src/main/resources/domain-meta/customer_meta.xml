@@ -1,0 +1,23 @@
+<domain-meta>
+	<name>customer</name>
+	<pluralName>customers</pluralName>
+	<listPage>
+		<template>/domain/list</template>
+		<basic-info>id;name;avatar</basic-info>
+	</listPage>
+	<detailPage>
+		<template>/domain/detail</template>
+		<basic-info>id;name</basic-info>
+	</detailPage>
+	<dialogPage>
+		<template>/domain/dialog</template>
+		<basic-info>name</basic-info>
+	</dialogPage>
+	<searchFields>name</searchFields>
+	<permissions>
+		<permission>
+			<role>user</role>
+			<operation>update</operation>
+		</permission>
+	</permissions>
+</domain-meta>

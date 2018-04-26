@@ -16,8 +16,9 @@
 	</nav>
 	<div class="container-fluid">
 		<div class="row">
+
 			<nav
-				class="col-12 col-md-3 col-xl-2 d-none d-md-block bg-light  bd-sidebar sidebar-sticky">
+				class="col-12 col-md-3 col-xl-2 d-none d-md-block bg-light sidebar sidebar-sticky">
 				<ul class="nav flex-column">
 					<li class="nav-item"><a class="nav-link active" href="/"
 						th:text="#{nav.home}"> Home <span class="sr-only">(current)</span>
@@ -26,6 +27,8 @@
 							Users </a></li>
 					<li class="nav-item"><a class="nav-link"
 						th:href="@{'/owners'}">Owners </a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{'/customers'}">Customers </a></li>
 					<li class="nav-item"><a class="nav-link" th:href="@{'/test'}">
 							Test Page </a></li>
 				</ul>
@@ -53,14 +56,15 @@
 			</nav>
 			<main role="main" class="col-auto ml-sm-auto col-lg-10 pt-3 px-4"
 				layout:fragment="content">
-			<p>Content goes here...</p>
+				<p>Content goes here...</p>
+
 			</main>
+			<footer class="my-5 pt-5 text-muted text-center text-small">
+				<div th:replace="fragments/footer :: footer" class="footer">&copy;
+					2017 blog.codeleak.pl</div>
+			</footer>
 		</div>
 
-		<footer class="my-5 pt-5 text-muted text-center text-small">
-			<div th:replace="fragments/footer :: footer" class="footer">&copy;
-				2017 blog.codeleak.pl</div>
-		</footer>
 	</div>
 	<section layout:fragment="page-script"></section>
 </body>

@@ -8,21 +8,17 @@ public class PageFieldMeta implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -5135890642322428908L;
-	private String name;
-	private String type;
-	private String path;
-	private Class<?> clazz;
+	private String type = "string";
+	private final String path;
 	private Object defaultValue;
 	private String translationKey;
+	private FieldValueTypeEnum valueType;
+
 	private long colLength = 6;
 	private boolean required = false;
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
+	public PageFieldMeta(String path) {
+		this.path = path;
 	}
 
 	public String getType() {
@@ -65,27 +61,22 @@ public class PageFieldMeta implements Serializable {
 		this.defaultValue = defaultValue;
 	}
 
-	public Class<?> getClazz() {
-		return clazz;
-	}
-
-	public void setClazz(Class<?> clazz) {
-		this.clazz = clazz;
-	}
-
 	public String getPath() {
 		return path;
 	}
 
-	public void setPath(String path) {
-		this.path = path;
+	public FieldValueTypeEnum getValueType() {
+		return valueType;
+	}
+
+	public void setValueType(FieldValueTypeEnum valueType) {
+		this.valueType = valueType;
 	}
 
 	@Override
 	public String toString() {
-		return "PageFieldMeta [name=" + name + ", type=" + type + ", path=" + path + ", clazz=" + clazz
-				+ ", defaultValue=" + defaultValue + ", translationKey=" + translationKey + ", colLength=" + colLength
-				+ ", required=" + required + "]";
+		return "PageFieldMeta [type=" + type + ", path=" + path + ", defaultValue=" + defaultValue + ", translationKey="
+				+ translationKey + ", colLength=" + colLength + ", required=" + required + "]";
 	}
 
 }

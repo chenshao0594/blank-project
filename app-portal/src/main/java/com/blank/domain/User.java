@@ -59,13 +59,13 @@ public class User extends BaseEntity implements UserDetails {
 	private boolean credentialsExpired = false;
 
 	@Column
-	private boolean enabled = true;
+	private Boolean enabled = true;
 
 	@Transient
-	private boolean passwordEncrypted = true;
+	private Boolean passwordEncrypted = true;
 
 	@Transient
-	private boolean verifyPasswordEncrypted = true;
+	private Boolean verifyPasswordEncrypted = true;
 
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_authorities", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "authority_id"))
@@ -73,6 +73,8 @@ public class User extends BaseEntity implements UserDetails {
 
 	@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade = CascadeType.ALL)
 	private UserProfile userProfile = new UserProfile();
+
+	private byte[] avator;
 
 	public User() {
 		passwordEncrypted = false;
@@ -198,6 +200,14 @@ public class User extends BaseEntity implements UserDetails {
 
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public byte[] getAvator() {
+		return avator;
+	}
+
+	public void setAvator(byte[] avator) {
+		this.avator = avator;
 	}
 
 	public void validateCreateUser(ValidationContext context) {

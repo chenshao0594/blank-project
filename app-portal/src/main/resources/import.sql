@@ -12,6 +12,7 @@ insert into users (id, email, username, password, name, enabled, account_expired
 
 
 insert into user_profiles (id,address, city,created_by,created_date,last_modified_by,last_modified_date) values (1,'scott@aol.com', 'scott','system', CURRENT_TIMESTAMP, 'system',  CURRENT_TIMESTAMP);
+insert into user_profiles (id,address, city,created_by,created_date,last_modified_by,last_modified_date) values (2,'pudong ', 'Shanghai','system', CURRENT_TIMESTAMP, 'system',  CURRENT_TIMESTAMP);
 
 -- ----------------------------------------------------------
 -- Authorities

@@ -1,4 +1,4 @@
-package com.blank.web;
+package com.blank.controller;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +16,7 @@ public class TestRestController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("1", "customer-1");
 		map.put("2", "customer-2");
-		map.put("3", "customer-3");
+		map.put("test ", "ajax test in dialog page ...");
 
 		return map;
 	}

@@ -70,9 +70,23 @@
 										<select class="custom-select d-block w-100"
 											th:field="*{__${each.path}__}">
 											<option th:text="#{common.select}" value="null"></option>
-											<option th:each="choice : ${each.values}"
+											<option th:each="choice : ${each.defaultValue}"
 												th:value="${choice.key}" th:text="${choice.value}" />
 										</select>
+										<div class="invalid-feedback">
+											Valid <span th:text="#{__${each.translationKey}__}"></span>
+											is required.
+										</div>
+									</th:block>
+									<th:block th:case="image">
+										<span>image case</span>
+										<input type="file" class="form-control" id="${each.path}_id"
+											th:field="*{__${each.path}__}" placeholder="" value=""
+											required>
+									   <input type="file" name="test" id="image-test">
+									   <input type="hidden" name="image-name" id="image-name"/>
+									   <input type="hidden" name="image-size" id="image-size"/>
+									   <input type="hidden" name="image-type" id="image-type"/>
 										<div class="invalid-feedback">
 											Valid <span th:text="#{__${each.translationKey}__}"></span>
 											is required.
@@ -91,6 +105,8 @@
 								</th:block>
 							</div>
 						</th:block>
+						<input type="file" name="test" id="image-test">
+						<input type="hidden" name="avator" id="avator"/>
 					</div>
 					<hr class="mb-4">
 					<div class="form-actions pull-right">
@@ -116,7 +132,7 @@
 					url : "/rest",
 					success : function(result) {
 						$.each(result, function(k, v) {
-							$("#success").text(k + "===" + v);
+							$("#success").append(k + "===" + v);
 							console.log(k + "===" + v)
 						});
 
@@ -126,6 +142,19 @@
 					}
 				});
 			});
+			
+			$("#image-test").change(function() {
+					var reader = new FileReader();
+					if(this.files){
+						var file = this.files[0];
+						reader.readAsArrayBuffer(file);
+						reader.onloadend = function(evt) {
+							 blob = evt.target.result;
+							 console.log(blob);
+							 $('#avator').val(blob);
+						}
+					}
+				});
 		</script>
 	</th:block>
 </body>
